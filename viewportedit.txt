@@ -18,3 +18,20 @@ node_modules >> react-native>>index.js >> 436line  // Deprecated Prop Types ...
 
 밑코드 실행
 npx patch-package react-native
+
+
+
+
+
+
+
+firebase 에러시
+
+metro.config.js파일 만들기
+const { getDefaultConfig } = require("@expo/metro-config");
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+defaultConfig.resolver.assetExts.push("cjs");
+
+module.exports = defaultConfig;
