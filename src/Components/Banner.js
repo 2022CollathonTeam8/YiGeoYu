@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 
-const Banner = ({ navigation }) => {
+const Banner = ({ height }) => {
   const [images, setImages] = useState([
     "https://source.unsplash.com/1024x768/?nature",
     "https://source.unsplash.com/1024x768/?water",
@@ -12,11 +12,11 @@ const Banner = ({ navigation }) => {
 
   const [state, setState] = useState(1);
   return (
-    <View style={{ width: "100%", marginTop: 10 }}>
+    <View style={{ width: "100%" }}>
       <SliderBox
         autoplay
         circleLoop
-        sliderBoxHeight={150}
+        sliderBoxHeight={height}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
         //   cover , contain, stretch, repeat, center

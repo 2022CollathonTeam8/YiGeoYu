@@ -10,23 +10,64 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="ListUp" component={ListUp} />
-      <Stack.Screen name="Event" component={Event} />
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="ListUp"
+        component={ListUp}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="Event"
+        component={Event}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const ProfileStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Profile" component={Profile} />
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}
+    >
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
+//탭바
 const Navigation = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -1,40 +1,46 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { Banner } from "../../Components";
 import { MaterialIcons } from "@expo/vector-icons";
 
-// console.log(Dimensions.get("window").height);
-// console.log(Dimensions.get("screen").height);
 const part_banner = Dimensions.get("screen").height * 0.19;
 
 console.log(part_banner);
 const Home = ({ navigation }) => {
   return (
-    <View>
-      <Banner />
+    <ScrollView>
+      <Banner height={part_banner} />
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Event");
-          // Alert.alert("dd");
         }}
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: part_banner,
-          backgroundColor: "red",
-          opacity: 0.5,
-        }}
-      >
-        {/* <Text>asasdfasdf</Text> */}
-      </TouchableOpacity>
+        style={styles.BannerTouchArea}
+      ></TouchableOpacity>
       <Text>
         <MaterialIcons name="home" size={24} color="black" />
       </Text>
       <Text>
         <MaterialIcons name="home" size={24} color="black" />
       </Text>
-    </View>
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  BannerTouchArea: {
+    position: "absolute",
+    width: "100%",
+    height: part_banner,
+    backgroundColor: "red", //터치영역
+    opacity: 0.5,
+  },
+});
 
 export default Home;
