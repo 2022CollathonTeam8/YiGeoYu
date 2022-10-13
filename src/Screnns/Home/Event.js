@@ -1,12 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 
-const Event = () => {
+const Event = ({ props }) => {
+  const aa = props;
   return (
     <View>
-      <Text>Evet</Text>
+      <Text>Event, {aa}</Text>
     </View>
   );
 };
+const styles = StyleSheet.create({});
 
 export default Event;

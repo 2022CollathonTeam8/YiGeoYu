@@ -3,19 +3,19 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 
 const Banner = ({ height }) => {
-  const [images, setImages] = useState([
+  const images = [
     "https://source.unsplash.com/1024x768/?nature",
     "https://source.unsplash.com/1024x768/?water",
     "https://source.unsplash.com/1024x768/?tree",
     "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
-  ]);
+  ];
 
   const [state, setState] = useState(1);
   return (
-    <View style={{ width: "100%" }}>
+    <View>
       <SliderBox
         autoplay
-        circleLoop
+        circleLoop={true}
         sliderBoxHeight={height}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
@@ -33,8 +33,8 @@ const Banner = ({ height }) => {
       <View
         style={{
           position: "absolute",
-          bottom: 5,
-          right: -10,
+          bottom: 10,
+          right: 30,
           paddingTop: 4,
           paddingBottom: 4,
           paddingHorizontal: 10,
@@ -43,7 +43,7 @@ const Banner = ({ height }) => {
         }}
       >
         <Text style={{ fontSize: 10, color: "#ffffff" }}>
-          {state}/{images.length}
+          {state}/{images.length} 모두보기
         </Text>
       </View>
     </View>
@@ -53,9 +53,7 @@ const Banner = ({ height }) => {
 const styles = StyleSheet.create({
   banner: {
     width: "90%",
-    borderRadius: 10,
-    borderColor: "black",
-    borderWidth: 2,
+    borderRadius: 5,
   },
 });
 
