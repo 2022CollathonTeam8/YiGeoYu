@@ -1,12 +1,16 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Dimensions } from "react-native";
 import { Banner } from "../../Components";
+import { MaterialIcons } from "@expo/vector-icons";
 
+// console.log(Dimensions.get("window").height);
+// console.log(Dimensions.get("screen").height);
+const part_banner = Dimensions.get("screen").height * 0.19;
+
+console.log(part_banner);
 const Home = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-
+    <View>
       <Banner />
       <TouchableOpacity
         onPress={() => {
@@ -16,12 +20,19 @@ const Home = ({ navigation }) => {
         style={{
           position: "absolute",
           width: "100%",
-          height: "30%",
-          // backgroundColor: "red",
+          height: part_banner,
+          backgroundColor: "red",
+          opacity: 0.5,
         }}
       >
         {/* <Text>asasdfasdf</Text> */}
       </TouchableOpacity>
+      <Text>
+        <MaterialIcons name="home" size={24} color="black" />
+      </Text>
+      <Text>
+        <MaterialIcons name="home" size={24} color="black" />
+      </Text>
     </View>
   );
 };
