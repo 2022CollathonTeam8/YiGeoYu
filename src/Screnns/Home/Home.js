@@ -10,53 +10,48 @@ import {
   Modal,
   Image,
 } from "react-native";
-import { Banner, CategoryList } from "../../Components";
+import { Banner, CategoryList, LostCard } from "../../Components";
 import { MaterialIcons } from "@expo/vector-icons";
+import BannerData from "../../DBTEMP/BannerData";
 
 const part_banner = Dimensions.get("screen").height * 0.15;
 
 const Home = ({ navigation }) => {
-  const [isShow, setIsShow] = useState(true);
+  const categoryList = BannerData; //임시데이터
+  const [isShow, setIsShow] = useState(false);
+  const [isData, setIsData] = useState({
+    id: 0,
+    type: "전체",
+    img: "https://source.unsplash.com/1024x768/?nature",
+  });
+
   const back = () => {
     setIsShow(false);
   };
 
-  const categoryList = [
-    {
-      id: 0,
-      type: "전체",
-      img: "https://source.unsplash.com/1024x768/?nature",
-    },
-    {
-      id: 1,
-      type: "전자기기",
-      img: "https://source.unsplash.com/1024x768/?water",
-    },
-    { id: 2, type: "의류", img: "https://source.unsplash.com/1024x768/?tree" },
-    {
-      id: 3,
-      type: "지갑",
-      img: "https://source.unsplash.com/1024x768/?nature",
-    },
-    { id: 4, type: "카드", img: "https://source.unsplash.com/1024x768/?water" },
-    { id: 5, type: "기타", img: "https://source.unsplash.com/1024x768/?tree" },
-  ];
-  const [isID, setIsID] = useState(0);
-  const chooseCategory = (id) => {
-    setIsID(id);
+  const chooseCategory = (key) => {
+    setIsData({
+      id: key,
+      type: categoryList[key].type,
+      img: categoryList[key].img,
+    });
     back();
-    console.log(isID);
   };
+
   return (
     <View>
+      {/*헤더*/}
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
           <Image
             source={require("../../../assets/Logo.png")}
             style={styles.logo}
           />
+          <Image
+            source={require("../../../assets/Title.png")}
+            style={styles.title}
+          />
         </View>
-        <View style={styles.blank}></View>
         <TouchableOpacity
           style={styles.CategoryBox}
           onPress={() => {
@@ -66,8 +61,12 @@ const Home = ({ navigation }) => {
           <MaterialIcons name="search" size={30} color="black" />
         </TouchableOpacity>
       </View>
+      {/*  */}
+
       <ScrollView>
-        <Banner height={part_banner} />
+        <View style={{ marginTop: 10 }}>
+          <Banner height={part_banner} />
+        </View>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Event");
@@ -75,125 +74,174 @@ const Home = ({ navigation }) => {
           style={styles.BannerTouchArea}
         ></TouchableOpacity>
 
-        <Text>{isID}</Text>
-        <Modal
-          visible={isShow}
-          animationType={"slide"}
-          transparent={true}
-          onRequestClose={isShow}
-          style={{ flex: 1 }}
-        >
-          <TouchableOpacity
-            style={styles.ModalClose}
-            onPress={back}
-          ></TouchableOpacity>
-          <View style={styles.ModalContainer}>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
-              >
-                카테고리
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 9,
-                justifyContent: "space-around",
-                alignItems: "center",
-              }}
-            >
-              <View style={{ flexDirection: "row" }}>
-                {categoryList.map((data, i) => {
-                  if (i < 3) {
-                    return (
-                      <TouchableOpacity
-                        key={i}
-                        onPress={() => chooseCategory(i)}
-                      >
-                        <CategoryList id={i} type={data.type} img={data.img} />
-                      </TouchableOpacity>
-                    );
-                  }
-                })}
-              </View>
+        <View style={{ paddingHorizontal: 20 }}>
+          <View style={styles.SelectCategoryBox}>
+            <Image
+              source={{ uri: isData.img }}
+              alt=""
+              style={styles.SelectCategoryImg}
+            />
+            <Text style={styles.SelectCategoryTitle}>{isData.type}</Text>
+          </View>
 
-              <View style={{ flexDirection: "row" }}>
-                {categoryList.map((data, i) => {
-                  if (i >= 3) {
-                    return (
-                      <CategoryList
-                        key={i}
-                        id={i}
-                        type={data.type}
-                        img={data.img}
-                      />
-                    );
-                  }
-                })}
-              </View>
+          {/* 예시 */}
+          <LostCard />
+          <LostCard />
+          <LostCard />
+          <LostCard />
+          <LostCard />
+          <LostCard />
+        </View>
+      </ScrollView>
+      {/*모달  */}
+      <Modal
+        visible={isShow}
+        animationType={"slide"}
+        transparent={true}
+        onRequestClose={isShow}
+        style={{ flex: 1 }}
+      >
+        {/* 닫기영역 */}
+        <TouchableOpacity
+          style={styles.ModalClose}
+          onPress={back}
+        ></TouchableOpacity>
+        {/* 닫기영역 */}
+
+        <View style={styles.ModalContainer}>
+          <View style={styles.ModalTitleBox}>
+            <Text style={styles.ModalTitle}>카테고리</Text>
+          </View>
+          <View style={styles.ModalCategoryBox}>
+            <View style={{ flexDirection: "row" }}>
+              {categoryList.map((data, i) => {
+                if (i < 3) {
+                  return (
+                    <TouchableOpacity
+                      key={i}
+                      style={styles.ModalCategoryItemTouchBox}
+                      onPress={() => chooseCategory(i)}
+                    >
+                      <CategoryList type={data.type} img={data.img} />
+                    </TouchableOpacity>
+                  );
+                }
+              })}
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              {categoryList.map((data, i) => {
+                if (i >= 3) {
+                  return (
+                    <TouchableOpacity
+                      key={i}
+                      style={styles.ModalCategoryItemTouchBox}
+                      onPress={() => chooseCategory(i)}
+                    >
+                      <CategoryList type={data.type} img={data.img} />
+                    </TouchableOpacity>
+                  );
+                }
+              })}
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.ModalClose}
-            onPress={back}
-          ></TouchableOpacity>
-        </Modal>
-      </ScrollView>
+        </View>
+        {/* 닫기영역 */}
+        <TouchableOpacity
+          style={styles.ModalClose}
+          onPress={back}
+        ></TouchableOpacity>
+        {/* 닫기영역 */}
+      </Modal>
+      {/*모달  */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   Header: {
-    height: Dimensions.get("window").height * 0.07,
+    height: Dimensions.get("window").height * 0.1,
     backgroundColor: "#f7f4e3",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     flexDirection: "row",
   },
   LogoBox: {
-    justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    flexDirection: "row",
+    flex: 6,
+    paddingHorizontal: 10,
   },
-  blank: {
-    flex: 4,
+
+  logo: {
+    width: Dimensions.get("window").width * 0.1,
+    resizeMode: "contain",
+  },
+  title: {
+    width: Dimensions.get("window").width * 0.5,
+    resizeMode: "contain",
   },
   CategoryBox: {
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    backgroundColor: "pink",
   },
-  logo: {
-    width: Dimensions.get("window").width * 0.1,
-    height: Dimensions.get("window").width * 0.1,
-    resizeMode: "contain",
+  /////////////
+  SelectCategoryBox: {
+    marginTop: 10,
+    borderWidth: 1,
+    // padding: 15,
+    borderRadius: 15,
+    flexDirection: "row",
+    alignItems: "center",
   },
+  SelectCategoryImg: {
+    width: 50,
+    height: 50,
+    resizeMode: "cover",
+    borderRadius: 15,
+  },
+  SelectCategoryTitle: {
+    paddingLeft: 20,
+    fontSize: 20,
+  },
+
+  ///////////
   BannerTouchArea: {
     position: "absolute",
     width: "100%",
     height: part_banner,
-    backgroundColor: "red", //터치영역
-    opacity: 0.3,
+    marginTop: 10,
   },
-
+  ////////////////
   ModalClose: {
-    // height: "25%",
     flex: 3,
     backgroundColor: "#929394",
-    opacity: 0.7,
+    opacity: 0.9,
   },
   ModalContainer: {
-    backgroundColor: "blue",
-    // height: "50%",
     flex: 4,
+    backgroundColor: "white",
+  },
+  ModalTitleBox: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ModalTitle: {
+    ontSize: 20,
+    fontWeight: "bold",
+  },
+  ModalCategoryBox: {
+    flex: 9,
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  ModalCategoryItemTouchBox: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

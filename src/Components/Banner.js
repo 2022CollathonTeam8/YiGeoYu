@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 
 const Banner = ({ height }) => {
@@ -53,7 +53,7 @@ const Banner = ({ height }) => {
 const styles = StyleSheet.create({
   banner: {
     width: "90%",
-    borderRadius: 5,
+    borderRadius: 15,
   },
 });
 
