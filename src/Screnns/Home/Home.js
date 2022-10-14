@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
           <Image
-            source={require("../../../assets/icon.png")}
+            source={require("../../../assets/Logo.png")}
             style={styles.logo}
           />
         </View>
