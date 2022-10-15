@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 
-const Banner = ({ height }) => {
+const Banner = () => {
   const images = [
     "https://source.unsplash.com/1024x768/?nature",
     "https://source.unsplash.com/1024x768/?water",
@@ -16,7 +16,7 @@ const Banner = ({ height }) => {
       <SliderBox
         autoplay
         circleLoop={true}
-        sliderBoxHeight={height}
+        sliderBoxHeight={173}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
         //   cover , contain, stretch, repeat, center

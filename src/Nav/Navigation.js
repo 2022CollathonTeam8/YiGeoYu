@@ -16,6 +16,7 @@ import {
   Home,
   ListUp,
   Event,
+  MakeItem,
   Login,
   Profile,
   ChatList,
@@ -44,6 +45,14 @@ const HomeStack = () => {
       <Stack.Screen
         name="ListUp"
         component={ListUp}
+        options={{
+          headerTitleAlign: "center",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="MakeItem"
+        component={MakeItem}
         options={{
           headerTitleAlign: "center",
           headerShown: true,

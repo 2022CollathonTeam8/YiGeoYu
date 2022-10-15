@@ -6,15 +6,16 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
+  SafeAreaView,
+  StatusBar,
   Button,
   Modal,
   Image,
 } from "react-native";
-import { Banner, CategoryList, LostCard } from "../../Components";
+import { Banner, CategoryList, LostCard, FloatingBtn } from "../../Components";
+import { Rank } from "../index";
 import { MaterialIcons } from "@expo/vector-icons";
 import BannerData from "../../DBTEMP/BannerData";
-
-const part_banner = Dimensions.get("screen").height * 0.15;
 
 const Home = ({ navigation }) => {
   const categoryList = BannerData; //임시데이터
@@ -37,9 +38,10 @@ const Home = ({ navigation }) => {
     });
     back();
   };
+  const [isRank, setIsRank] = useState(false);
 
   return (
-    <View>
+    <>
       {/*헤더*/}
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
@@ -47,52 +49,114 @@ const Home = ({ navigation }) => {
             source={require("../../../assets/Logo.png")}
             style={styles.logo}
           />
-          <Image
-            source={require("../../../assets/Title.png")}
-            style={styles.title}
-          />
         </View>
-        <TouchableOpacity
-          style={styles.CategoryBox}
-          onPress={() => {
-            setIsShow(!isShow);
-          }}
-        >
-          <MaterialIcons name="search" size={30} color="black" />
-        </TouchableOpacity>
+        {/*  */}
+        <View style={styles.MiddleMenuBox}>
+          <View style={styles.MiddleMenuBoxTextBox}>
+            <TouchableOpacity
+              style={[
+                styles.MiddleMenuBoxTextBoxTouch,
+                {
+                  borderBottomColor: isRank ? "transparent" : "black",
+                },
+              ]}
+              onPress={() => setIsRank(false)}
+            >
+              <Text
+                style={[
+                  styles.MiddleMenuBoxText,
+                  {
+                    fontWeight: !isRank ? "700" : "400",
+                    color: !isRank ? "black" : "#5E5B5B",
+                  },
+                ]}
+              >
+                게시판
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.MiddleMenuBoxTextBoxTouch,
+                {
+                  borderBottomColor: !isRank ? "transparent" : "black",
+                },
+              ]}
+              onPress={() => setIsRank(true)}
+            >
+              <Text
+                style={[
+                  styles.MiddleMenuBoxText,
+                  {
+                    fontWeight: isRank ? "700" : "400",
+                    color: isRank ? "black" : "#5E5B5B",
+                  },
+                ]}
+              >
+                습득자랭킹
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {!isRank && (
+            <TouchableOpacity
+              style={styles.CategoryBox}
+              onPress={() => {
+                setIsShow(!isShow);
+              }}
+            >
+              <MaterialIcons name="menu" size={25} color="black" />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
       {/*  */}
-
-      <ScrollView>
-        <View style={{ marginTop: 10 }}>
-          <Banner height={part_banner} />
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Event");
-          }}
-          style={styles.BannerTouchArea}
-        ></TouchableOpacity>
-
-        <View style={{ paddingHorizontal: 20 }}>
-          <View style={styles.SelectCategoryBox}>
-            <Image
-              source={{ uri: isData.img }}
-              alt=""
-              style={styles.SelectCategoryImg}
-            />
-            <Text style={styles.SelectCategoryTitle}>{isData.type}</Text>
+      {/* FloationgBtn */}
+      {!isRank && (
+        <FloatingBtn navigation={() => navigation.navigate("MakeItem")} />
+      )}
+      {!isRank ? (
+        <ScrollView>
+          <View style={{ paddingTop: 25, backgroundColor: "white" }}>
+            <Banner />
           </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Event");
+            }}
+            style={styles.BannerTouchArea}
+          ></TouchableOpacity>
 
-          {/* 예시 */}
-          <LostCard />
-          <LostCard />
-          <LostCard />
-          <LostCard />
-          <LostCard />
-          <LostCard />
-        </View>
-      </ScrollView>
+          <View
+            style={{
+              paddingHorizontal: 15,
+              paddingTop: 15,
+              backgroundColor: "white",
+            }}
+          >
+            <View style={styles.SelectCategoryBox}>
+              <Image
+                source={{ uri: isData.img }}
+                alt=""
+                style={styles.SelectCategoryImg}
+              />
+              <Text style={styles.SelectCategoryText}>이거유?</Text>
+            </View>
+
+            {/* 예시 */}
+            <LostCard />
+            <LostCard />
+            <LostCard />
+            <LostCard />
+            <LostCard />
+            <LostCard />
+          </View>
+        </ScrollView>
+      ) : (
+        <ScrollView>
+          <Rank />
+        </ScrollView>
+      )}
+
       {/*모달  */}
       <Modal
         visible={isShow}
@@ -154,64 +218,78 @@ const Home = ({ navigation }) => {
         {/* 닫기영역 */}
       </Modal>
       {/*모달  */}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   Header: {
-    height: Dimensions.get("window").height * 0.1,
-    backgroundColor: "#f7f4e3",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    flexDirection: "row",
+    height: 85,
+    backgroundColor: "white",
   },
   LogoBox: {
     alignItems: "center",
-    flexDirection: "row",
-    flex: 6,
-    paddingHorizontal: 10,
+    justifyContent: "center",
+    paddingTop: 3,
+    height: 37,
   },
 
   logo: {
     width: Dimensions.get("window").width * 0.1,
     resizeMode: "contain",
   },
-  title: {
-    width: Dimensions.get("window").width * 0.5,
-    resizeMode: "contain",
+  ////////////////////
+  MiddleMenuBox: {
+    flexDirection: "row",
   },
+  MiddleMenuBoxTextBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 9,
+    paddingHorizontal: 15,
+  },
+  MiddleMenuBoxTextBoxTouch: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomWidth: 3,
+  },
+  MiddleMenuBoxText: {
+    fontSize: 15,
+    lineHeight: 20,
+  },
+
   CategoryBox: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   /////////////
   SelectCategoryBox: {
-    marginTop: 10,
-    borderWidth: 1,
-    // padding: 15,
-    borderRadius: 15,
+    height: 50,
     flexDirection: "row",
     alignItems: "center",
   },
   SelectCategoryImg: {
     width: 50,
     height: 50,
+    borderRadius: 100,
+    marginRight: 15,
     resizeMode: "cover",
-    borderRadius: 15,
   },
-  SelectCategoryTitle: {
-    paddingLeft: 20,
-    fontSize: 20,
+  SelectCategoryText: {
+    fontWeight: "700",
+    fontSize: 15,
   },
 
   ///////////
   BannerTouchArea: {
     position: "absolute",
     width: "100%",
-    height: part_banner,
-    marginTop: 10,
+    height: 173,
+    marginTop: 25,
+    // backgroundColor: "blue",
+    // opacity: 0.6,
   },
   ////////////////
   ModalClose: {
