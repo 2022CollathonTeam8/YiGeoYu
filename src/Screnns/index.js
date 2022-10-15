@@ -5,7 +5,7 @@ import MakeItem from "./Home/MakeItem";
 import Rank from "./Home/Rank";
 
 import Login from "./Profile/Login";
-import Profile from "./Profile/Profile";
+import SignUp from "./Profile/SignUp";
 
 import ChatList from "./Chat/ChatList";
 import ChatRoom from "./Chat/ChatRoom";
@@ -17,7 +17,7 @@ export {
   Event,
   MakeItem,
   Login,
-  Profile,
+  SignUp,
   ChatList,
   ChatRoom,
 };

@@ -18,7 +18,7 @@ import {
   Event,
   MakeItem,
   Login,
-  Profile,
+  SignUp,
   ChatList,
   ChatRoom,
 } from "../Screnns";
@@ -97,8 +97,8 @@ const ProfileStack = () => {
         }}
       />
       <Stack.Screen
-        name="Profile"
-        component={Profile}
+        name="SignUp"
+        component={SignUp}
         options={{
           headerTitleAlign: "center",
         }}

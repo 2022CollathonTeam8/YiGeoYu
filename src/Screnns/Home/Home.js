@@ -13,7 +13,7 @@ import {
   Image,
 } from "react-native";
 import { Banner, CategoryList, LostCard, FloatingBtn } from "../../Components";
-import { Rank } from "../index";
+import Rank from "./Rank";
 import { MaterialIcons } from "@expo/vector-icons";
 import BannerData from "../../DBTEMP/BannerData";
 
@@ -39,6 +39,9 @@ const Home = ({ navigation }) => {
     back();
   };
   const [isRank, setIsRank] = useState(false);
+  // useEffect(() => {
+  //   setIsRank(false);
+  // }, []);
 
   return (
     <>
