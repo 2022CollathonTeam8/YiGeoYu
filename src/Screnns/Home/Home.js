@@ -6,9 +6,6 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  Button,
   Modal,
   Image,
 } from "react-native";
@@ -16,6 +13,7 @@ import { Banner, CategoryList, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
 import { MaterialIcons } from "@expo/vector-icons";
 import BannerData from "../../DBTEMP/BannerData";
+import images from "../../../assets";
 
 const Home = ({ navigation }) => {
   const categoryList = BannerData; //임시데이터
@@ -23,7 +21,8 @@ const Home = ({ navigation }) => {
   const [isData, setIsData] = useState({
     id: 0,
     type: "전체",
-    img: "https://source.unsplash.com/1024x768/?nature",
+    // img: "https://source.unsplash.com/1024x768/?nature",
+    img: images.bag,
   });
 
   const back = () => {
@@ -39,9 +38,6 @@ const Home = ({ navigation }) => {
     back();
   };
   const [isRank, setIsRank] = useState(false);
-  // useEffect(() => {
-  //   setIsRank(false);
-  // }, []);
 
   return (
     <>
@@ -138,7 +134,7 @@ const Home = ({ navigation }) => {
           >
             <View style={styles.SelectCategoryBox}>
               <Image
-                source={{ uri: isData.img }}
+                source={isData.img}
                 alt=""
                 style={styles.SelectCategoryImg}
               />
@@ -276,9 +272,8 @@ const styles = StyleSheet.create({
   SelectCategoryImg: {
     width: 50,
     height: 50,
-    borderRadius: 100,
     marginRight: 15,
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   SelectCategoryText: {
     fontWeight: "700",

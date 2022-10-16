@@ -143,13 +143,6 @@ const Navigation = () => {
           screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
-            tabBarStyle: {
-              height: 50,
-              marginHorizontal: 50,
-              paddingVertical: 10,
-              // backgroundColor: "blue",
-            },
-            tabBarLabelStyle: { paddingBottom: 3 },
           }}
         >
           <Tab.Screen

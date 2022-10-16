@@ -4,7 +4,7 @@ import { Text, Image, StyleSheet } from "react-native";
 const CategoryList = (props) => {
   return (
     <>
-      <Image source={{ uri: props.img }} alt="" style={styles.c_img} />
+      <Image source={props.img} alt="" style={styles.c_img} />
       <Text style={styles.font}>{props.type}</Text>
     </>
   );
