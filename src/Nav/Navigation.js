@@ -140,7 +140,17 @@ const Navigation = () => {
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="홈"
-          screenOptions={{ headerShown: false }}
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              height: 50,
+              marginHorizontal: 50,
+              paddingVertical: 10,
+              // backgroundColor: "blue",
+            },
+            tabBarLabelStyle: { paddingBottom: 3 },
+          }}
         >
           <Tab.Screen
             name="채팅"
@@ -148,7 +158,7 @@ const Navigation = () => {
             options={{
               tabBarIcon: () => {
                 return (
-                  <MaterialIcons name="chat-bubble" size={24} color="black" />
+                  <MaterialIcons name="chat-bubble" size={30} color="black" />
                 );
               },
             }}
@@ -158,7 +168,7 @@ const Navigation = () => {
             component={HomeStack}
             options={{
               tabBarIcon: () => {
-                return <MaterialIcons name="home" size={24} color="black" />;
+                return <MaterialIcons name="home" size={30} color="black" />;
               },
             }}
           />
@@ -167,7 +177,7 @@ const Navigation = () => {
             component={ProfileStack}
             options={{
               tabBarIcon: () => {
-                return <MaterialIcons name="person" size={24} color="black" />;
+                return <MaterialIcons name="person" size={30} color="black" />;
               },
             }}
           />
