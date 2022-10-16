@@ -9,8 +9,9 @@ import {
   Modal,
   Platform,
   Image,
+  SafeAreaView,
 } from "react-native";
-import { Banner, CategoryList, LostCard, FloatingBtn } from "../../Components";
+import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
 import { MaterialIcons } from "@expo/vector-icons";
 import BannerData from "../../DBTEMP/BannerData";
@@ -106,7 +107,9 @@ const Home = ({ navigation }) => {
       {/*  */}
       {/* FloationgBtn */}
       {!isRank && (
-        <FloatingBtn navigation={() => navigation.navigate("MakeItem")} />
+        <FloatingBtn
+          navigation={() => navigation.navigate("MakeItem", { testing: false })}
+        />
       )}
       {/*  */}
       {!isRank ? (
@@ -160,17 +163,14 @@ const Home = ({ navigation }) => {
         onRequestClose={isShow}
         style={{ flex: 1 }}
       >
-        {/* 닫기영역 */}
-        <TouchableOpacity
-          style={styles.ModalClose}
-          onPress={back}
-        ></TouchableOpacity>
-        {/* 닫기영역 */}
-
-        <View style={styles.ModalContainer}>
-          <View style={styles.ModalTitleBox}>
-            <Text style={styles.ModalTitle}>카테고리</Text>
+        <SafeAreaView style={styles.ModalContainer}>
+          <View style={styles.ModalTopBox}>
+            <Text>dddd</Text>
           </View>
+          <View style={styles.ModalMidBox}>
+            <Text style={styles.ModalMidBoxText}>카테고리</Text>
+          </View>
+
           <View style={styles.ModalCategoryBox}>
             <View style={{ flexDirection: "row" }}>
               {categoryList.map((data, i) => {
@@ -181,7 +181,7 @@ const Home = ({ navigation }) => {
                       style={styles.ModalCategoryItemTouchBox}
                       onPress={() => chooseCategory(i)}
                     >
-                      <CategoryList type={data.type} img={data.img} />
+                      <CategoryItem type={data.type} img={data.img} />
                     </TouchableOpacity>
                   );
                 }
@@ -197,19 +197,16 @@ const Home = ({ navigation }) => {
                       style={styles.ModalCategoryItemTouchBox}
                       onPress={() => chooseCategory(i)}
                     >
-                      <CategoryList type={data.type} img={data.img} />
+                      <CategoryItem type={data.type} img={data.img} />
                     </TouchableOpacity>
                   );
                 }
               })}
             </View>
           </View>
-        </View>
+        </SafeAreaView>
         {/* 닫기영역 */}
-        <TouchableOpacity
-          style={styles.ModalClose}
-          onPress={back}
-        ></TouchableOpacity>
+
         {/* 닫기영역 */}
       </Modal>
       {/*모달  */}
@@ -290,18 +287,19 @@ const styles = StyleSheet.create({
   BannerTouchArea: {
     position: "absolute",
     width: "100%",
-    height: 173,
+    height: 176,
     marginTop: 10,
-    // backgroundColor: "blue",
-    // opacity: 0.6,
+    backgroundColor: "blue",
+    opacity: 0.6,
   },
 
   Banner: {
     backgroundColor: "#ECEDDD",
+    height: 227,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     paddingTop: 10,
-    paddingBottom: 15,
+    // paddingBottom: 15,
     ...Platform.select({
       ios: {
         shadowColor: "#000",
@@ -319,31 +317,39 @@ const styles = StyleSheet.create({
   },
   ////////////////
   ModalClose: {
-    flex: 3,
     backgroundColor: "#929394",
     opacity: 0.9,
   },
   ModalContainer: {
-    flex: 4,
-    backgroundColor: "white",
-  },
-  ModalTitleBox: {
     flex: 1,
+    backgroundColor: "white",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  ModalTopBox: {
+    width: "100%",
+    height: 273,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    backgroundColor: "#AACC93",
+  },
+  ModalMidBox: {
+    paddingLeft: 15,
+    height: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
-  ModalTitle: {
-    ontSize: 20,
+  ModalMidBoxText: {
     fontWeight: "bold",
+    fontSize: 15,
+    color: "#5F7A61",
   },
+
   ModalCategoryBox: {
-    flex: 9,
     justifyContent: "space-around",
     alignItems: "center",
   },
 
   ModalCategoryItemTouchBox: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },

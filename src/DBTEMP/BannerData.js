@@ -7,10 +7,10 @@ const categoryList = [
   },
   {
     id: 1,
-    type: "전자기기",
-    img: images.bag,
+    type: "디지털 기기",
+    img: images.computer,
   },
-  { id: 2, type: "의류", img: images.bag },
+  { id: 2, type: "지갑", img: images.wallet },
   {
     id: 3,
     type: "지갑",
@@ -18,6 +18,13 @@ const categoryList = [
   },
   { id: 4, type: "카드", img: images.bag },
   { id: 5, type: "기타", img: images.bag },
+  {
+    id: 6,
+    type: "지갑",
+    img: images.bag,
+  },
+  { id: 7, type: "카드", img: images.bag },
+  { id: 8, type: "기타", img: images.bag },
 ];
 
 export default categoryList;

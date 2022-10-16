@@ -4,7 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import SelectDropdown from "react-native-select-dropdown";
 import { AntDesign } from "@expo/vector-icons";
 
-const MakeItem = () => {
+const MakeItem = ({ route }) => {
   const [image, setImage] = useState(null);
   const countries = ["Egypt", "Canada", "Australia", "Ireland"];
   const pickImage = async () => {
@@ -29,7 +29,7 @@ const MakeItem = () => {
       {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
-
+      {console.log(route.params.testing)}
       <SelectDropdown
         data={countries}
         onSelect={(selectedItem, index) => {
