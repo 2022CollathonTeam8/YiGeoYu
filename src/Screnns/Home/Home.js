@@ -31,9 +31,8 @@ const Home = ({ navigation, route }) => {
     Dong = route.params.PassingData.dong;
     Category = route.params.PassingData.category;
   }
-  console.log(Gu, Dong, Category);
+  console.log(Gu, Dong, Category); //확인용
 
-  const [getData, setGetData] = useState(route.params);
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       {/*헤더*/}
@@ -87,13 +86,8 @@ const Home = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
           {!isRank && (
-            <TouchableOpacity
-              style={styles.CategoryBox}
-              onPress={() => {
-                setIsShow(!isShow);
-              }}
-            >
-              <MaterialIcons name="menu" size={25} color="#5F7A61" />
+            <TouchableOpacity style={styles.CategoryBox} onPress={() => {}}>
+              <MaterialIcons name="search" size={25} color="#5F7A61" />
             </TouchableOpacity>
           )}
         </View>
