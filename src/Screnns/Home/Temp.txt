@@ -1,0 +1,106 @@
+{
+  /*모달  */
+}
+<Modal
+  visible={isShow}
+  animationType={"slide"}
+  transparent={true}
+  onRequestClose={isShow}
+  style={{ flex: 1 }}
+>
+  <SafeAreaView style={styles.ModalContainer}>
+    <View style={styles.ModalTopBox}>
+      <Text>dddd</Text>
+    </View>
+    <View style={styles.ModalMidBox}>
+      <Text style={styles.ModalMidBoxText}>카테고리</Text>
+    </View>
+
+    <View style={styles.ModalCategoryBox}>
+      <View style={{ flexDirection: "row" }}>
+        {categoryList.map((data, i) => {
+          if (i < 3) {
+            return (
+              <TouchableOpacity
+                key={i}
+                style={styles.ModalCategoryItemTouchBox}
+                onPress={() => chooseCategory(i)}
+              >
+                <CategoryItem type={data.type} img={data.img} />
+              </TouchableOpacity>
+            );
+          }
+        })}
+      </View>
+
+      <View style={{ flexDirection: "row" }}>
+        {categoryList.map((data, i) => {
+          if (i >= 3) {
+            return (
+              <TouchableOpacity
+                key={i}
+                style={styles.ModalCategoryItemTouchBox}
+                onPress={() => chooseCategory(i)}
+              >
+                <CategoryItem type={data.type} img={data.img} />
+              </TouchableOpacity>
+            );
+          }
+        })}
+      </View>
+    </View>
+  </SafeAreaView>
+  {/* 닫기영역 */}
+
+  {/* 닫기영역 */}
+</Modal>;
+{
+  /*모달  */
+}
+
+
+
+
+
+
+
+
+
+ ////////////////
+ ModalClose: {
+    backgroundColor: "#929394",
+    opacity: 0.9,
+  },
+  ModalContainer: {
+    flex: 1,
+    backgroundColor: "white",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  ModalTopBox: {
+    width: "100%",
+    height: 273,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    backgroundColor: "#AACC93",
+  },
+  ModalMidBox: {
+    paddingLeft: 15,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+  ModalMidBoxText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "#5F7A61",
+  },
+
+  ModalCategoryBox: {
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  ModalCategoryItemTouchBox: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
