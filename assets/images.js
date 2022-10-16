@@ -2,14 +2,14 @@ const images = {
   bag: require("./bag.png"),
   addBtn: require("./addBtn.png"),
   Icon2: require("./Icon2.png"),
-  computer: require("./computer.png"),
-  people: require("./people.png"),
+  profile: require("./Profile.png"),
   book: require("./book.png"),
-  card: require("./card.png"),
-  makeu: require("./makeup.png"),
+  cap: require("./cap.png"),
+  cosmetics: require("./cosmetics.png"),
   shirt: require("./shirt.png"),
   umbrella: require("./umbrella.png"),
   wallet: require("./wallet.png"),
+  necklace: require("./necklace.png"),
 };
 
 export default images;

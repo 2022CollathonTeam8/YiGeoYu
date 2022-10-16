@@ -6,6 +6,7 @@ import Rank from "./Home/Rank";
 
 import Login from "./Profile/Login";
 import SignUp from "./Profile/SignUp";
+import Profile from "./Profile/Profile";
 
 import ChatList from "./Chat/ChatList";
 import ChatRoom from "./Chat/ChatRoom";
@@ -18,6 +19,7 @@ export {
   MakeItem,
   Login,
   SignUp,
+  Profile,
   ChatList,
   ChatRoom,
 };

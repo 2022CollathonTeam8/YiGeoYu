@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   View,
   Text,
@@ -14,32 +14,26 @@ import {
 import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
 import { MaterialIcons } from "@expo/vector-icons";
-import BannerData from "../../DBTEMP/BannerData";
 import images from "../../../assets";
 
-const Home = ({ navigation }) => {
-  const categoryList = BannerData; //임시데이터
-  const [isShow, setIsShow] = useState(false);
-  const [isData, setIsData] = useState({
-    id: 0,
-    type: "전체",
-    img: images.bag,
-  });
-
-  const back = () => {
-    setIsShow(false);
-  };
-
-  const chooseCategory = (key) => {
-    setIsData({
-      id: key,
-      type: categoryList[key].type,
-      img: categoryList[key].img,
-    });
-    back();
-  };
+const Home = ({ navigation, route }) => {
   const [isRank, setIsRank] = useState(false);
 
+  var Gu = "";
+  var Dong = "";
+  var Category = {};
+  if (route.params == undefined) {
+    Gu = "전체";
+    Dong = "전체";
+    Category = { id: 0, type: "전체보기", img: images.bag };
+  } else {
+    Gu = route.params.PassingData.gu;
+    Dong = route.params.PassingData.dong;
+    Category = route.params.PassingData.category;
+  }
+  console.log(Gu, Dong, Category);
+
+  const [getData, setGetData] = useState(route.params);
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       {/*헤더*/}
@@ -133,7 +127,7 @@ const Home = ({ navigation }) => {
           >
             <View style={styles.SelectCategoryBox}>
               <Image
-                source={isData.img}
+                source={Category.img}
                 alt=""
                 style={styles.SelectCategoryImg}
               />
@@ -154,62 +148,6 @@ const Home = ({ navigation }) => {
           <Rank />
         </ScrollView>
       )}
-
-      {/*모달  */}
-      <Modal
-        visible={isShow}
-        animationType={"slide"}
-        transparent={true}
-        onRequestClose={isShow}
-        style={{ flex: 1 }}
-      >
-        <SafeAreaView style={styles.ModalContainer}>
-          <View style={styles.ModalTopBox}>
-            <Text>dddd</Text>
-          </View>
-          <View style={styles.ModalMidBox}>
-            <Text style={styles.ModalMidBoxText}>카테고리</Text>
-          </View>
-
-          <View style={styles.ModalCategoryBox}>
-            <View style={{ flexDirection: "row" }}>
-              {categoryList.map((data, i) => {
-                if (i < 3) {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      style={styles.ModalCategoryItemTouchBox}
-                      onPress={() => chooseCategory(i)}
-                    >
-                      <CategoryItem type={data.type} img={data.img} />
-                    </TouchableOpacity>
-                  );
-                }
-              })}
-            </View>
-
-            <View style={{ flexDirection: "row" }}>
-              {categoryList.map((data, i) => {
-                if (i >= 3) {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      style={styles.ModalCategoryItemTouchBox}
-                      onPress={() => chooseCategory(i)}
-                    >
-                      <CategoryItem type={data.type} img={data.img} />
-                    </TouchableOpacity>
-                  );
-                }
-              })}
-            </View>
-          </View>
-        </SafeAreaView>
-        {/* 닫기영역 */}
-
-        {/* 닫기영역 */}
-      </Modal>
-      {/*모달  */}
     </View>
   );
 };
@@ -217,8 +155,6 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   Header: {
     height: 85,
-
-    // backgroundColor: "red",
     backgroundColor: "#ECEDDD",
   },
   LogoBox: {
@@ -229,13 +165,9 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    // width: Dimensions.get("window").width * 0.1,
-    // resizeMode: "contain",
     width: 34,
     height: 34,
     marginTop: 8,
-    // width: "100%",
-    // resizeMode: "cover",
   },
   ////////////////////
   MiddleMenuBox: {
@@ -272,6 +204,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   SelectCategoryImg: {
+    paddingLeft: 15,
     width: 30,
     height: 30,
     marginRight: 10,
@@ -289,8 +222,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 176,
     marginTop: 10,
-    backgroundColor: "blue",
-    opacity: 0.6,
+    // backgroundColor: "blue",
+    // opacity: 0.6,
   },
 
   Banner: {
@@ -314,44 +247,6 @@ const styles = StyleSheet.create({
         elevation: 5,
       },
     }),
-  },
-  ////////////////
-  ModalClose: {
-    backgroundColor: "#929394",
-    opacity: 0.9,
-  },
-  ModalContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-  ModalTopBox: {
-    width: "100%",
-    height: 273,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    backgroundColor: "#AACC93",
-  },
-  ModalMidBox: {
-    paddingLeft: 15,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-  ModalMidBoxText: {
-    fontWeight: "bold",
-    fontSize: 15,
-    color: "#5F7A61",
-  },
-
-  ModalCategoryBox: {
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-
-  ModalCategoryItemTouchBox: {
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
 

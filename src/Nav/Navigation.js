@@ -19,6 +19,7 @@ import {
   MakeItem,
   Login,
   SignUp,
+  Profile,
   ChatList,
   ChatRoom,
 } from "../Screnns";
@@ -77,6 +78,13 @@ const HomeStack = () => {
           },
         })}
       />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -84,11 +92,19 @@ const HomeStack = () => {
 const ProfileStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Profile"
       screenOptions={{
         headerBackTitleVisible: false,
+        headerShown: false,
       }}
     >
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
       <Stack.Screen
         name="Login"
         component={Login}
@@ -146,12 +162,18 @@ const Navigation = () => {
           }}
         >
           <Tab.Screen
-            name="채팅"
-            component={ChatStack}
+            name="프로필"
+            component={ProfileStack}
             options={{
               tabBarIcon: () => {
                 return (
-                  <MaterialIcons name="chat-bubble" size={30} color="black" />
+                  <View
+                    style={{
+                      marginLeft: Dimensions.get("screen").width * 0.2,
+                    }}
+                  >
+                    <MaterialIcons name="menu" size={30} color="black" />
+                  </View>
                 );
               },
             }}
@@ -166,11 +188,19 @@ const Navigation = () => {
             }}
           />
           <Tab.Screen
-            name="프로필"
-            component={ProfileStack}
+            name="채팅"
+            component={ChatStack}
             options={{
               tabBarIcon: () => {
-                return <MaterialIcons name="person" size={30} color="black" />;
+                return (
+                  <View
+                    style={{
+                      marginRight: Dimensions.get("screen").width * 0.2,
+                    }}
+                  >
+                    <MaterialIcons name="chat-bubble" size={30} color="black" />
+                  </View>
+                );
               },
             }}
           />
