@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   Modal,
+  Platform,
   Image,
 } from "react-native";
 import { Banner, CategoryList, LostCard, FloatingBtn } from "../../Components";
@@ -21,7 +22,6 @@ const Home = ({ navigation }) => {
   const [isData, setIsData] = useState({
     id: 0,
     type: "전체",
-    // img: "https://source.unsplash.com/1024x768/?nature",
     img: images.bag,
   });
 
@@ -40,14 +40,11 @@ const Home = ({ navigation }) => {
   const [isRank, setIsRank] = useState(false);
 
   return (
-    <>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
       {/*헤더*/}
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
-          <Image
-            source={require("../../../assets/Logo.png")}
-            style={styles.logo}
-          />
+          <Image source={images.Icon2} style={styles.logo} />
         </View>
         {/*  */}
         <View style={styles.MiddleMenuBox}>
@@ -56,7 +53,7 @@ const Home = ({ navigation }) => {
               style={[
                 styles.MiddleMenuBoxTextBoxTouch,
                 {
-                  borderBottomColor: isRank ? "transparent" : "black",
+                  borderBottomColor: isRank ? "transparent" : "#5F7A61",
                 },
               ]}
               onPress={() => setIsRank(false)}
@@ -66,7 +63,6 @@ const Home = ({ navigation }) => {
                   styles.MiddleMenuBoxText,
                   {
                     fontWeight: !isRank ? "700" : "400",
-                    color: !isRank ? "black" : "#5E5B5B",
                   },
                 ]}
               >
@@ -78,7 +74,7 @@ const Home = ({ navigation }) => {
               style={[
                 styles.MiddleMenuBoxTextBoxTouch,
                 {
-                  borderBottomColor: !isRank ? "transparent" : "black",
+                  borderBottomColor: !isRank ? "transparent" : "#5F7A61",
                 },
               ]}
               onPress={() => setIsRank(true)}
@@ -88,7 +84,6 @@ const Home = ({ navigation }) => {
                   styles.MiddleMenuBoxText,
                   {
                     fontWeight: isRank ? "700" : "400",
-                    color: isRank ? "black" : "#5E5B5B",
                   },
                 ]}
               >
@@ -103,7 +98,7 @@ const Home = ({ navigation }) => {
                 setIsShow(!isShow);
               }}
             >
-              <MaterialIcons name="menu" size={25} color="black" />
+              <MaterialIcons name="menu" size={25} color="#5F7A61" />
             </TouchableOpacity>
           )}
         </View>
@@ -113,9 +108,10 @@ const Home = ({ navigation }) => {
       {!isRank && (
         <FloatingBtn navigation={() => navigation.navigate("MakeItem")} />
       )}
+      {/*  */}
       {!isRank ? (
         <ScrollView>
-          <View style={{ paddingTop: 25, backgroundColor: "white" }}>
+          <View style={styles.Banner}>
             <Banner />
           </View>
           <TouchableOpacity
@@ -217,14 +213,16 @@ const Home = ({ navigation }) => {
         {/* 닫기영역 */}
       </Modal>
       {/*모달  */}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   Header: {
     height: 85,
-    backgroundColor: "white",
+
+    // backgroundColor: "red",
+    backgroundColor: "#ECEDDD",
   },
   LogoBox: {
     alignItems: "center",
@@ -234,8 +232,13 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: Dimensions.get("window").width * 0.1,
-    resizeMode: "contain",
+    // width: Dimensions.get("window").width * 0.1,
+    // resizeMode: "contain",
+    width: 34,
+    height: 34,
+    marginTop: 8,
+    // width: "100%",
+    // resizeMode: "cover",
   },
   ////////////////////
   MiddleMenuBox: {
@@ -255,6 +258,7 @@ const styles = StyleSheet.create({
   MiddleMenuBoxText: {
     fontSize: 15,
     lineHeight: 20,
+    color: "#5F7A61",
   },
 
   CategoryBox: {
@@ -268,16 +272,18 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: "row",
     alignItems: "center",
+    // backgroundColor: "red",
   },
   SelectCategoryImg: {
-    width: 50,
-    height: 50,
-    marginRight: 15,
+    width: 30,
+    height: 30,
+    marginRight: 10,
     resizeMode: "contain",
   },
   SelectCategoryText: {
     fontWeight: "700",
     fontSize: 15,
+    color: "#5F7A61",
   },
 
   ///////////
@@ -285,9 +291,31 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: 173,
-    marginTop: 25,
+    marginTop: 10,
     // backgroundColor: "blue",
     // opacity: 0.6,
+  },
+
+  Banner: {
+    backgroundColor: "#ECEDDD",
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    paddingTop: 10,
+    paddingBottom: 15,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   ////////////////
   ModalClose: {

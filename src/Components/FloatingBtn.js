@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import images from "../../assets";
 const FloatingBtn = (props) => {
   return (
     <TouchableOpacity style={styles.Main} onPress={props.navigation}>
-      <Text style={styles.Plus}>+</Text>
+      {/* <Text style={styles.Plus}>+</Text> */}
+      <Image source={images.addBtn} style={styles.Plus} alt="" />
     </TouchableOpacity>
   );
 };
@@ -21,9 +22,11 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   Plus: {
-    fontSize: 53,
-    color: "white",
-    fontWeight: "bold",
+    width: 53,
+    height: 53,
+    // fontSize: 53,
+    // color: "white",
+    // fontWeight: "bold",
   },
 });
 
