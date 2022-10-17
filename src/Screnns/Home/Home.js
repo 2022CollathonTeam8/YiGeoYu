@@ -17,8 +17,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import images from "../../../assets";
 
 const Home = ({ navigation, route }) => {
+  //사용자 랭킹을 볼 수 있는 스위치
   const [isRank, setIsRank] = useState(false);
 
+  //마이페이지 카테도리에서 정보 받아오기
   var Gu = "";
   var Dong = "";
   var Category = {};
@@ -32,6 +34,7 @@ const Home = ({ navigation, route }) => {
     Category = route.params.PassingData.category;
   }
   console.log(Gu, Dong, Category); //확인용
+  //////
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
@@ -40,7 +43,6 @@ const Home = ({ navigation, route }) => {
         <View style={styles.LogoBox}>
           <Image source={images.Icon2} style={styles.logo} />
         </View>
-        {/*  */}
         <View style={styles.MiddleMenuBox}>
           <View style={styles.MiddleMenuBoxTextBox}>
             <TouchableOpacity
@@ -100,6 +102,8 @@ const Home = ({ navigation, route }) => {
         />
       )}
       {/*  */}
+
+      {/* 스크롤뷰 */}
       {!isRank ? (
         <ScrollView>
           <View style={styles.Banner}>
@@ -138,6 +142,7 @@ const Home = ({ navigation, route }) => {
           </View>
         </ScrollView>
       ) : (
+        // 랭킹화면
         <ScrollView>
           <Rank />
         </ScrollView>

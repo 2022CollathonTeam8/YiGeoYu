@@ -13,7 +13,7 @@ import {
 import images from "../../../assets/images";
 import SelectDropdown from "react-native-select-dropdown";
 import { AntDesign } from "@expo/vector-icons";
-import categoryList from "../../DBTEMP/BannerData";
+import categoryList from "../../DBTEMP/categoryList";
 
 const Item = ({ type, img }) => {
   return (
