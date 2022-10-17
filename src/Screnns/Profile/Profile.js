@@ -27,7 +27,7 @@ const Item = ({ type, img }) => {
 const Profile = ({ navigation }) => {
   const DaejeonDB = Daejeon;
   const DumpData = CategoryData;
-  const [GoDong, setGoDong] = useState(DaejeonDB[1].Array);
+  const [GoDong, setGoDong] = useState(DaejeonDB[1].Array); //name :"동" Array :["전체"]
   var SelectGu = "";
   var SelectDong = "";
 
@@ -76,17 +76,17 @@ const Profile = ({ navigation }) => {
             data={DaejeonDB[0].Array}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
-              SelectGu = selectedItem;
-              console.log(SelectGu);
+
+              console.log(selectedItem);
               DaejeonDB.map((temp) => {
-                if (temp.name == SelectGu) {
+                if (temp.name == selectedItem) {
                   return setGoDong(temp.Array);
                 }
               });
             }}
             defaultButtonText={"구"}
             buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
+              return (SelectGu = selectedItem);
             }}
             rowTextForSelection={(item, index) => {
               return item;
