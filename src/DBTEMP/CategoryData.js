@@ -1,5 +1,5 @@
 import images from "assets";
-const categoryList = [
+const CategoryData = [
   {
     id: 0,
     type: "전체보기",
@@ -34,4 +34,4 @@ const categoryList = [
   },
 ];
 
-export default categoryList;
+export default CategoryData;
