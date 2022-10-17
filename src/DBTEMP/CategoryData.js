@@ -3,14 +3,14 @@ const CategoryData = [
   {
     id: 0,
     type: "전체보기",
-    img: images.bag,
+    img: images.all,
   },
   {
     id: 1,
     type: "가방",
     img: images.bag,
   },
-  { id: 2, type: "디지털 기기", img: images.bag },
+  { id: 2, type: "디지털 기기", img: images.laptop },
   {
     id: 3,
     type: "지갑",
@@ -26,11 +26,11 @@ const CategoryData = [
   { id: 7, type: "화장품", img: images.cosmetics },
   { id: 8, type: "악세사리", img: images.necklace },
   { id: 9, type: "잡화", img: images.cap },
-  { id: 10, type: "카드/신분증", img: images.bag },
+  { id: 10, type: "카드/신분증", img: images.card },
   {
     id: 11,
     type: "기타",
-    img: images.bag,
+    img: images.box,
   },
 ];
 

@@ -1,5 +1,9 @@
 const images = {
   bag: require("./bag.png"),
+  all: require("./all.png"),
+  box: require("./box.png"),
+  card: require("./card.png"),
+  laptop: require("./laptop.png"),
   addBtn: require("./addBtn.png"),
   Icon2: require("./Icon2.png"),
   profile: require("./Profile.png"),

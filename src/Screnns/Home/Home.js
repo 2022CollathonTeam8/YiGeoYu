@@ -27,7 +27,7 @@ const Home = ({ navigation, route }) => {
   if (route.params == undefined) {
     Gu = "전체";
     Dong = "전체";
-    Category = { id: 0, type: "전체보기", img: images.bag };
+    Category = { id: 0, type: "전체보기", img: images.all };
   } else {
     Gu = route.params.PassingData.gu;
     Dong = route.params.PassingData.dong;
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     width: 30,
     height: 30,
-    marginRight: 10,
+    marginRight: 5,
     resizeMode: "contain",
   },
   SelectCategoryText: {
