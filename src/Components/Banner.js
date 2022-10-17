@@ -16,7 +16,7 @@ const Banner = () => {
       <SliderBox
         autoplay
         circleLoop={true}
-        sliderBoxHeight={173}
+        sliderBoxHeight={186}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
         //   cover , contain, stretch, repeat, center

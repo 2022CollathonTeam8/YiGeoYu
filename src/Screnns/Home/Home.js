@@ -219,8 +219,8 @@ const styles = StyleSheet.create({
   BannerTouchArea: {
     position: "absolute",
     width: "100%",
-    height: 176,
-    marginTop: 10,
+    height: 186,
+    marginTop: 22,
     // backgroundColor: "blue",
     // opacity: 0.6,
   },
@@ -230,7 +230,8 @@ const styles = StyleSheet.create({
     height: 227,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    paddingTop: 10,
+    paddingTop: 22,
+
     // paddingBottom: 15,
     ...Platform.select({
       ios: {
