@@ -23,7 +23,7 @@ import {
   ChatList,
   ChatRoom,
 } from "../Screnns";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -172,7 +172,11 @@ const Navigation = () => {
                       marginLeft: Dimensions.get("screen").width * 0.2,
                     }}
                   >
-                    <MaterialIcons name="menu" size={30} color="black" />
+                    <MaterialCommunityIcons
+                      name="menu"
+                      size={30}
+                      color="black"
+                    />
                   </View>
                 );
               },
@@ -183,7 +187,13 @@ const Navigation = () => {
             component={HomeStack}
             options={{
               tabBarIcon: () => {
-                return <MaterialIcons name="home" size={30} color="black" />;
+                return (
+                  <MaterialCommunityIcons
+                    name="home-outline"
+                    size={30}
+                    color="black"
+                  />
+                );
               },
             }}
           />
@@ -198,7 +208,11 @@ const Navigation = () => {
                       marginRight: Dimensions.get("screen").width * 0.2,
                     }}
                   >
-                    <MaterialIcons name="chat-bubble" size={30} color="black" />
+                    <MaterialCommunityIcons
+                      name="message-processing-outline"
+                      size={30}
+                      color="black"
+                    />
                   </View>
                 );
               },
