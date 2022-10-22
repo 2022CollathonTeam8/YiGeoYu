@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Platform,
   StyleSheet,
@@ -23,9 +23,44 @@ import {
   ChatList,
   ChatRoom,
 } from "../Screnns";
+import { FloatingBtn } from "../Components";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+import * as Location from "expo-location";
+
+const getLoc = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      let {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      const location__ = await Location.reverseGeocodeAsync(
+        { latitude, longitude },
+        { useGoogleMaps: false }
+      );
+      // console.log(location__[0].district);
+      setLocation(location__[0].district);
+    })();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+  return location;
+};
 
 const HomeStack = () => {
   return (
@@ -52,14 +87,6 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name="MakeItem"
-        component={MakeItem}
-        options={{
-          headerTitleAlign: "center",
-          headerShown: true,
-        }}
-      />
-      <Stack.Screen
         name="Event"
         component={Event}
         options={({ navigation }) => ({
@@ -78,13 +105,7 @@ const HomeStack = () => {
           },
         })}
       />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerTitleAlign: "center",
-        }}
-      />
+      <Stack.Screen name="ProfileStack" component={ProfileStack} />
     </Stack.Navigator>
   );
 };
@@ -148,9 +169,9 @@ const ChatStack = () => {
     </Stack.Navigator>
   );
 };
-
 //탭바
 const Navigation = () => {
+  let locdae = getLoc();
   return (
     <SafeAreaView style={styles.SafeAreaViewAnd}>
       <NavigationContainer>
@@ -159,29 +180,12 @@ const Navigation = () => {
           screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
+            tabBarStyle: {
+              // height: 55,
+              // backgroundColor: "red",
+            },
           }}
         >
-          <Tab.Screen
-            name="프로필"
-            component={ProfileStack}
-            options={{
-              tabBarIcon: () => {
-                return (
-                  <View
-                    style={{
-                      marginLeft: Dimensions.get("screen").width * 0.2,
-                    }}
-                  >
-                    <MaterialCommunityIcons
-                      name="menu"
-                      size={30}
-                      color="black"
-                    />
-                  </View>
-                );
-              },
-            }}
-          />
           <Tab.Screen
             name="홈"
             component={HomeStack}
@@ -197,6 +201,21 @@ const Navigation = () => {
               },
             }}
           />
+
+          <Tab.Screen
+            name="MakeItem"
+            children={() => <MakeItem data={locdae} />}
+            // component={MakeItem}
+            // data={locdae}
+            options={{
+              presentation: "transparentModal",
+              // headerTitleAlign: "center",
+              // headerShown: true,
+              tabBarIcon: () => {
+                return <FloatingBtn />;
+              },
+            }}
+          />
           <Tab.Screen
             name="채팅"
             component={ChatStack}
@@ -204,9 +223,9 @@ const Navigation = () => {
               tabBarIcon: () => {
                 return (
                   <View
-                    style={{
-                      marginRight: Dimensions.get("screen").width * 0.2,
-                    }}
+                  // style={{
+                  //   marginRight: Dimensions.get("screen").width * 0.2,
+                  // }}
                   >
                     <MaterialCommunityIcons
                       name="message-processing-outline"
