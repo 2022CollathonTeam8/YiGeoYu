@@ -16,7 +16,7 @@ const Banner = () => {
       <SliderBox
         autoplay
         circleLoop={true}
-        sliderBoxHeight={186}
+        sliderBoxHeight={160}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
         //   cover , contain, stretch, repeat, center
@@ -34,7 +34,7 @@ const Banner = () => {
         style={{
           position: "absolute",
           bottom: 10,
-          right: 30,
+          right: 65,
           paddingTop: 4,
           paddingBottom: 4,
           paddingHorizontal: 10,
@@ -52,8 +52,11 @@ const Banner = () => {
 
 const styles = StyleSheet.create({
   banner: {
-    width: "90%",
-    borderRadius: 15,
+    // width: "90%",
+    width: 298,
+    borderRadius: 50,
+    borderColor: "white",
+    borderWidth: 1,
   },
 });
 

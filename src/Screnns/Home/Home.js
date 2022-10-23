@@ -15,11 +15,43 @@ import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
 import { MaterialIcons } from "@expo/vector-icons";
 import images from "../../../assets";
+import * as Location from "expo-location";
+
+const getLoc = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      // let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      let {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync();
+      const location__ = await Location.reverseGeocodeAsync(
+        { latitude, longitude },
+        { useGoogleMaps: false }
+      );
+      console.log(location__[0]);
+      setLocation(location__[0].district);
+    })();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+  return location;
+};
 
 const Home = ({ navigation, route }) => {
-  //사용자 랭킹을 볼 수 있는 스위치
-  const [isRank, setIsRank] = useState(false);
-
+  let locdata = getLoc();
   //마이페이지 카테도리에서 정보 받아오기
   var Gu = "";
   var Dong = "";
@@ -41,89 +73,46 @@ const Home = ({ navigation, route }) => {
       {/*헤더*/}
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
+          <TouchableOpacity
+            style={styles.CategoryBox}
+            onPress={() => navigation.navigate("ProfileStack")}
+          >
+            <MaterialIcons name="menu" size={25} color="white" />
+          </TouchableOpacity>
           <Image source={images.Icon2} style={styles.logo} />
-        </View>
-        <View style={styles.MiddleMenuBox}>
-          <View style={styles.MiddleMenuBoxTextBox}>
-            <TouchableOpacity
-              style={[
-                styles.MiddleMenuBoxTextBoxTouch,
-                {
-                  borderBottomColor: isRank ? "transparent" : "#5F7A61",
-                },
-              ]}
-              onPress={() => setIsRank(false)}
-            >
-              <Text
-                style={[
-                  styles.MiddleMenuBoxText,
-                  {
-                    fontWeight: !isRank ? "700" : "400",
-                  },
-                ]}
-              >
-                게시판
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.MiddleMenuBoxTextBoxTouch,
-                {
-                  borderBottomColor: !isRank ? "transparent" : "#5F7A61",
-                },
-              ]}
-              onPress={() => setIsRank(true)}
-            >
-              <Text
-                style={[
-                  styles.MiddleMenuBoxText,
-                  {
-                    fontWeight: isRank ? "700" : "400",
-                  },
-                ]}
-              >
-                습득자랭킹
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {!isRank && (
-            <TouchableOpacity style={styles.CategoryBox} onPress={() => {}}>
-              <MaterialIcons name="search" size={25} color="#5F7A61" />
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.CategoryBox} onPress={() => {}}>
+            <MaterialIcons name="search" size={25} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
-      {/*  */}
-      {/* FloationgBtn */}
-      {!isRank && (
-        <FloatingBtn
-          navigation={() => navigation.navigate("MakeItem", { testing: false })}
-        />
-      )}
-      {/*  */}
 
       {/* 스크롤뷰 */}
-      {!isRank ? (
-        <ScrollView>
-          <View style={styles.Banner}>
-            <Banner />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Event");
-            }}
-            style={styles.BannerTouchArea}
-          ></TouchableOpacity>
 
-          <View
-            style={{
-              paddingHorizontal: 15,
-              paddingTop: 15,
-              backgroundColor: "white",
-            }}
-          >
-            <View style={styles.SelectCategoryBox}>
+      <ScrollView>
+        <View style={styles.Banner}>
+          <View style={styles.tempArea}></View>
+          <Banner />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Event");
+          }}
+          style={styles.BannerTouchArea}
+        ></TouchableOpacity>
+
+        <View
+          style={{
+            paddingHorizontal: 14,
+            paddingTop: 15,
+          }}
+        >
+          <View style={styles.SelectCategoryBox}>
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 4,
+              }}
+            >
               <Image
                 source={Category.img}
                 alt=""
@@ -131,108 +120,74 @@ const Home = ({ navigation, route }) => {
               />
               <Text style={styles.SelectCategoryText}>이거유?</Text>
             </View>
-
-            {/* 예시 */}
-            <LostCard />
-            <LostCard />
-            <LostCard />
-            <LostCard />
-            <LostCard />
-            <LostCard />
+            <FloatingBtn
+              navigation={() => navigation.navigate("Make", { loc: locdata })}
+            />
           </View>
-        </ScrollView>
-      ) : (
-        // 랭킹화면
-        <ScrollView>
-          <Rank />
-        </ScrollView>
-      )}
+          {/* 예시 */}
+          <TouchableOpacity onPress={() => navigation.navigate("ListUp")}>
+            <LostCard />
+          </TouchableOpacity>
+          <LostCard />
+          <LostCard />
+          <LostCard />
+          <LostCard />
+          <LostCard />
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   Header: {
-    height: 85,
-    backgroundColor: "#ECEDDD",
+    backgroundColor: "#5F7A61",
+    // justifyContent: "center",
   },
   LogoBox: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 3,
-    height: 37,
+    justifyContent: "space-between",
   },
 
   logo: {
     width: 34,
     height: 34,
-    marginTop: 8,
   },
-  ////////////////////
-  MiddleMenuBox: {
-    flexDirection: "row",
-  },
-  MiddleMenuBoxTextBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 9,
-    paddingHorizontal: 15,
-  },
-  MiddleMenuBoxTextBoxTouch: {
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    borderBottomWidth: 3,
-  },
-  MiddleMenuBoxText: {
-    fontSize: 15,
-    lineHeight: 20,
-    color: "#5F7A61",
-  },
-
   CategoryBox: {
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
-  /////////////
-  SelectCategoryBox: {
-    height: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    // backgroundColor: "red",
-  },
-  SelectCategoryImg: {
-    paddingLeft: 15,
-    width: 30,
-    height: 30,
-    marginRight: 5,
-    resizeMode: "contain",
-  },
-  SelectCategoryText: {
-    fontWeight: "700",
-    fontSize: 15,
-    color: "#5F7A61",
-  },
+
+  ////////////////////
 
   ///////////
+  tempArea: {
+    width: 119,
+    height: 27,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 30,
+    alignSelf: "center",
+    marginVertical: 19,
+  },
   BannerTouchArea: {
     position: "absolute",
-    width: "100%",
-    height: 186,
-    marginTop: 22,
+    width: "20%",
+    marginTop: 190,
+    right: 60,
+    height: 20,
     // backgroundColor: "blue",
     // opacity: 0.6,
   },
 
   Banner: {
-    backgroundColor: "#ECEDDD",
-    height: 227,
+    backgroundColor: "#5F7A61",
+    paddingBottom: 19,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    paddingTop: 22,
-
-    // paddingBottom: 15,
     ...Platform.select({
       ios: {
         shadowColor: "#000",
@@ -247,6 +202,25 @@ const styles = StyleSheet.create({
         elevation: 5,
       },
     }),
+  },
+
+  /////////////
+  SelectCategoryBox: {
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  SelectCategoryImg: {
+    width: 30,
+    height: 30,
+    marginRight: 5,
+    resizeMode: "contain",
+  },
+  SelectCategoryText: {
+    fontWeight: "700",
+    fontSize: 15,
+    color: "#5F7A61",
+    alignSelf: "center",
   },
 });
 
