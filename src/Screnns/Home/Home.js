@@ -120,7 +120,6 @@ const Home = ({ navigation, route }) => {
               />
               <Text style={styles.SelectCategoryText}>이거유?</Text>
             </View>
-            {/* {console.log(Platform, text)} */}
             <FloatingBtn
               navigation={() => navigation.navigate("Make", { loc: locdata })}
             />
@@ -174,9 +173,10 @@ const styles = StyleSheet.create({
   },
   BannerTouchArea: {
     position: "absolute",
-    width: "100%",
-    marginTop: 65,
-    height: 160,
+    width: "20%",
+    marginTop: 190,
+    right: 60,
+    height: 20,
     // backgroundColor: "blue",
     // opacity: 0.6,
   },

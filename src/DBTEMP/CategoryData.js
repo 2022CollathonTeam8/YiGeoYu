@@ -2,7 +2,7 @@ import images from "assets";
 const CategoryData = [
   {
     id: 0,
-    type: "전체보기",
+    type: "전체",
     img: images.all,
   },
   {
