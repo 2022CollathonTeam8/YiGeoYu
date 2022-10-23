@@ -125,7 +125,9 @@ const Home = ({ navigation, route }) => {
             />
           </View>
           {/* 예시 */}
-          <LostCard />
+          <TouchableOpacity onPress={() => navigation.navigate("ListUp")}>
+            <LostCard />
+          </TouchableOpacity>
           <LostCard />
           <LostCard />
           <LostCard />

@@ -219,7 +219,6 @@ const Profile = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   Header: {
-    backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
   },

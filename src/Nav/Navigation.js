@@ -75,17 +75,17 @@ const HomeStack = () => {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={({ navigation }) => ({
-          headerTitleAlign: "center",
-        })}
+        // options={({ navigation }) => ({
+        //   headerTitleAlign: "center",
+        // })}
       />
       <Stack.Screen
         name="ListUp"
         component={ListUp}
-        options={{
-          headerTitleAlign: "center",
-          headerShown: true,
-        }}
+        // options={{
+        //   headerTitleAlign: "center",
+        //   headerShown: true,
+        // }}
       />
       <Stack.Screen
         name="Event"
@@ -94,16 +94,16 @@ const HomeStack = () => {
           headerTitleAlign: "center",
           headerShown: true,
           // headerTransparent: true,
-          headerRight: () => {
-            return (
-              <TouchableOpacity onPress={() => navigation.navigate("Modals")}>
-                <Image
-                  source={require("../../assets/icon.png")}
-                  style={styles.logo}
-                />
-              </TouchableOpacity>
-            );
-          },
+          // headerRight: () => {
+          //   return (
+          //     <TouchableOpacity onPress={() => navigation.navigate("Modals")}>
+          //       <Image
+          //         source={require("../../assets/icon.png")}
+          //         style={styles.logo}
+          //       />
+          //     </TouchableOpacity>
+          //   );
+          // },
         })}
       />
 
@@ -112,9 +112,9 @@ const HomeStack = () => {
       <Stack.Screen
         name="Make"
         component={MakeItem}
-        options={({ navigation }) => ({
-          headerTitleAlign: "center",
-        })}
+        // options={({ navigation }) => ({
+        //   headerTitleAlign: "center",
+        // })}
       />
     </Stack.Navigator>
   );
