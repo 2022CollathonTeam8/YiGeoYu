@@ -17,37 +17,41 @@ import { MaterialIcons } from "@expo/vector-icons";
 import images from "../../../assets";
 import * as Location from "expo-location";
 
+const getLoc = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      // let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      let {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync();
+      const location__ = await Location.reverseGeocodeAsync(
+        { latitude, longitude },
+        { useGoogleMaps: false }
+      );
+      console.log(location__[0]);
+      setLocation(location__[0].district);
+    })();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+  return location;
+};
+
 const Home = ({ navigation, route }) => {
-  // const [location, setLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       setErrorMsg("Permission to access location was denied");
-  //       return;
-  //     }
-
-  //     let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
-  //     let {
-  //       coords: { latitude, longitude },
-  //     } = await Location.getCurrentPositionAsync({ accuracy: 6 });
-  //     const location__ = await Location.reverseGeocodeAsync(
-  //       { latitude, longitude },
-  //       { useGoogleMaps: false }
-  //     );
-  //     // console.log(location__[0].district);
-  //     setLocation(location);
-  //   })();
-  // }, []);
-
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
-
+  let locdata = getLoc();
   //마이페이지 카테도리에서 정보 받아오기
   var Gu = "";
   var Dong = "";
@@ -98,21 +102,29 @@ const Home = ({ navigation, route }) => {
 
         <View
           style={{
-            paddingHorizontal: 15,
+            paddingHorizontal: 14,
             paddingTop: 15,
-            backgroundColor: "white",
           }}
         >
           <View style={styles.SelectCategoryBox}>
-            <Image
-              source={Category.img}
-              alt=""
-              style={styles.SelectCategoryImg}
-            />
-            <Text style={styles.SelectCategoryText}>이거유?</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flex: 4,
+              }}
+            >
+              <Image
+                source={Category.img}
+                alt=""
+                style={styles.SelectCategoryImg}
+              />
+              <Text style={styles.SelectCategoryText}>이거유?</Text>
+            </View>
             {/* {console.log(Platform, text)} */}
+            <FloatingBtn
+              navigation={() => navigation.navigate("Make", { loc: locdata })}
+            />
           </View>
-
           {/* 예시 */}
           <LostCard />
           <LostCard />
@@ -163,6 +175,7 @@ const styles = StyleSheet.create({
   BannerTouchArea: {
     position: "absolute",
     width: "100%",
+    marginTop: 65,
     height: 160,
     // backgroundColor: "blue",
     // opacity: 0.6,
@@ -170,10 +183,9 @@ const styles = StyleSheet.create({
 
   Banner: {
     backgroundColor: "#5F7A61",
-    // height: 200,
     paddingBottom: 19,
-    borderBottomLeftRadius: 80,
-    borderBottomRightRadius: 80,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     ...Platform.select({
       ios: {
         shadowColor: "#000",
@@ -197,7 +209,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   SelectCategoryImg: {
-    paddingLeft: 15,
     width: 30,
     height: 30,
     marginRight: 5,
@@ -207,6 +218,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 15,
     color: "#5F7A61",
+    alignSelf: "center",
   },
 });
 

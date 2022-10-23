@@ -40,15 +40,15 @@ const getLoc = () => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      // let location = await Location.getCurrentPositionAsync({ accuracy: 6 });
       let {
         coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync({ accuracy: 6 });
+      } = await Location.getCurrentPositionAsync();
       const location__ = await Location.reverseGeocodeAsync(
         { latitude, longitude },
         { useGoogleMaps: false }
       );
-      // console.log(location__[0].district);
+      console.log(location__[0]);
       setLocation(location__[0].district);
     })();
   }, []);
@@ -63,6 +63,7 @@ const getLoc = () => {
 };
 
 const HomeStack = () => {
+  let locdae = getLoc();
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -105,7 +106,16 @@ const HomeStack = () => {
           },
         })}
       />
+
       <Stack.Screen name="ProfileStack" component={ProfileStack} />
+
+      <Stack.Screen
+        name="Make"
+        component={MakeItem}
+        options={({ navigation }) => ({
+          headerTitleAlign: "center",
+        })}
+      />
     </Stack.Navigator>
   );
 };
@@ -202,7 +212,7 @@ const Navigation = () => {
             }}
           />
 
-          <Tab.Screen
+          {/* <Tab.Screen
             name="MakeItem"
             children={() => <MakeItem data={locdae} />}
             // component={MakeItem}
@@ -215,7 +225,7 @@ const Navigation = () => {
                 return <FloatingBtn />;
               },
             }}
-          />
+          /> */}
           <Tab.Screen
             name="채팅"
             component={ChatStack}

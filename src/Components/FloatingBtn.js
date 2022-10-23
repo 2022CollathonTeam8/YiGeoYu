@@ -1,32 +1,44 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
 import images from "../../assets";
-const FloatingBtn = () => {
+const FloatingBtn = (props) => {
   return (
     // <TouchableOpacity style={styles.Main} onPress={props.navigation}>
     //   {/* <Text style={styles.Plus}>+</Text> */}
     //   <Image source={images.addBtn} style={styles.Plus} alt="" />
     // </TouchableOpacity>
-    <View style={styles.Main}>
-      <Image source={images.addBtn} style={styles.Plus} alt="" />
-    </View>
+    <TouchableOpacity style={styles.Main} onPress={props.navigation}>
+      <Image source={images.pencil} style={styles.Plus} alt="" />
+
+      <Text style={{ alignSelf: "center" }}> 글쓰기</Text>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   Main: {
-    width: 53,
-    height: 53,
-    borderRadius: 100,
-    backgroundColor: "#CCF6C8",
-    // position: "absolute",
-    // right: 30,
-    bottom: 10,
-    // zIndex: 1,
+    backgroundColor: "white",
+    borderColor: "#5F7A61",
+    borderWidth: 2,
+    borderRadius: 50,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    alignContent: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    flex: 1,
   },
   Plus: {
-    width: 53,
-    height: 53,
+    width: 15,
+    height: 15,
+    alignSelf: "center",
   },
 });
 

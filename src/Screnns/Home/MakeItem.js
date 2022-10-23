@@ -12,10 +12,9 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import SelectDropdown from "react-native-select-dropdown";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import images from "../../../assets/images";
-const MakeItem = ({ navigation, data }) => {
-  console.log(data);
+const MakeItem = ({ navigation, route }) => {
   const [image, setImage] = useState(null);
   const countries = ["Egypt", "Canada", "Australia", "Ireland"];
   const pickImage = async () => {
@@ -40,7 +39,9 @@ const MakeItem = ({ navigation, data }) => {
       <View style={styles.Header}>
         <TouchableOpacity
           style={styles.CategoryBox}
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            navigation.goBack();
+          }}
         >
           <AntDesign name="close" size={25} color="black" />
         </TouchableOpacity>
@@ -80,7 +81,24 @@ const MakeItem = ({ navigation, data }) => {
             )}
           </TouchableOpacity>
           <TextInput placeholder="글 제목" style={styles.TIT} />
-          <Text>{data}</Text>
+          {/* <Text>{route.params.loc}</Text> */}
+        </View>
+        <View style={styles.MakeMid}>
+          <View style={styles.MakeMidFilterBox}>
+            <View style={styles.MakeMidFilter}>
+              <Text style={styles.MakeMidFilterText}>물건분류</Text>
+              <TouchableOpacity>
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.MakeMidFiltered}>
+              <Text>전체보기</Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
     </>
@@ -110,8 +128,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     paddingTop: 29,
-    borderBottomLeftRadius: 80,
-    borderBottomRightRadius: 80,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     ...Platform.select({
       ios: {
         shadowColor: "#000",
@@ -140,6 +158,35 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 18,
   },
+  ///////////////
+  MakeMid: {
+    paddingHorizontal: 24,
+  },
+  MakeMidFilterBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#EBEBEB",
+  },
+  MakeMidFilter: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: 61,
+    flex: 2,
+  },
+  MakeMidFilterText: {
+    fontSize: 20,
+    color: "#5F7A61",
+    fontWeight: "bold",
+  },
+  MakeMidFiltered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 61,
+    backgroundColor: "blue",
+  },
+  //////////////
 
   dropdown1BtnStyle: {
     width: "80%",

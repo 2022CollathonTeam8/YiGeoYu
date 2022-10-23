@@ -15,6 +15,7 @@ const images = {
   wallet: require("./img/wallet.png"),
   necklace: require("./img/necklace.png"),
   IMGBtn: require("./img/IMGBtn.png"),
+  pencil: require("./img/pencil.png"),
 };
 
 export default images;
