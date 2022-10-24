@@ -40,7 +40,7 @@ const ListUp = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView bounces={false} style={{ flex: 1, backgroundColor: "white" }}>
         <View style={styles.TopArea}>
           <View style={styles.ImgBox}>
             {image != null && (

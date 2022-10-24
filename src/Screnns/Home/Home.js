@@ -10,6 +10,7 @@ import {
   Platform,
   Image,
   SafeAreaView,
+  RefreshControl,
 } from "react-native";
 import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
@@ -68,6 +69,16 @@ const Home = ({ navigation, route }) => {
   console.log(Gu, Dong, Category); //확인용
   //////
 
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       {/*헤더*/}
@@ -88,7 +99,18 @@ const Home = ({ navigation, route }) => {
 
       {/* 스크롤뷰 */}
 
-      <ScrollView>
+      <ScrollView
+        // overScrollMode="never"
+        // bounces={false}
+        // bouncesZoom={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            style={{ backgroundColor: "#5F7A61" }}
+          />
+        }
+      >
         <View style={styles.Banner}>
           <View style={styles.tempArea}></View>
           <Banner />
@@ -107,7 +129,8 @@ const Home = ({ navigation, route }) => {
           }}
         >
           <View style={styles.SelectCategoryBox}>
-            <View
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProfileStack")}
               style={{
                 flexDirection: "row",
                 flex: 4,
@@ -119,7 +142,7 @@ const Home = ({ navigation, route }) => {
                 style={styles.SelectCategoryImg}
               />
               <Text style={styles.SelectCategoryText}>이거유?</Text>
-            </View>
+            </TouchableOpacity>
             <FloatingBtn
               navigation={() => navigation.navigate("Make", { loc: locdata })}
             />
