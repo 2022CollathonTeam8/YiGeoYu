@@ -1,12 +1,30 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 import {
   AntDesign,
   FontAwesome,
   MaterialIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
+import { LostCard } from "../../Components";
 const GetItem = ({ navigation }) => {
+  //리프레쉬
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
   return (
     <>
       {/* //////HEADER////// */}
@@ -35,9 +53,18 @@ const GetItem = ({ navigation }) => {
         </View>
       </View>
 
-      <View>
-        <Text>GetItem</Text>
-      </View>
+      <ScrollView
+        overScrollMode="never"
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        style={styles.MidArea}
+      >
+        <LostCard />
+        <LostCard />
+        <LostCard />
+        <LostCard />
+      </ScrollView>
     </>
   );
 };
@@ -68,5 +95,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   //////////////
+
+  MidArea: {
+    backgroundColor: "white",
+  },
 });
 export default GetItem;

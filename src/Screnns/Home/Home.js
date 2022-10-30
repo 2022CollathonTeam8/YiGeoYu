@@ -102,9 +102,9 @@ const Home = ({ navigation, route }) => {
       {/* 스크롤뷰 */}
 
       <ScrollView
-        overScrollMode="never"
         // bounces={false}
         // bouncesZoom={false}
+        overScrollMode="never"
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
