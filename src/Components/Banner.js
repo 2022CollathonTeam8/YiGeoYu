@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import Swiper from "react-native-swiper";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 
 const Banner = () => {
@@ -12,10 +13,10 @@ const Banner = () => {
 
   const [state, setState] = useState(1);
   return (
-    <View>
+    <>
       <SliderBox
-        autoplay
-        circleLoop={true}
+        autoplay={false}
+        circleLoop={false}
         sliderBoxHeight={160}
         resizeMethod={"resize"}
         resizeMode="stretch" // 이미지 사이즈 조절값
@@ -33,8 +34,8 @@ const Banner = () => {
       <View
         style={{
           position: "absolute",
-          bottom: 10,
-          right: 65,
+          bottom: 25,
+          right: 75,
           paddingTop: 4,
           paddingBottom: 4,
           paddingHorizontal: 10,
@@ -46,7 +47,24 @@ const Banner = () => {
           {state}/{images.length} 모두보기
         </Text>
       </View>
-    </View>
+      {/* <Swiper
+        autoplay
+        showsPagination={false}
+        width={298}
+        height={160}
+        autoplayTimeout={3}
+      >
+        {images.map((img, i) => {
+          return (
+            <View key={i} style={{ backgroundColor: "red" }}>
+              {console.log(img)}
+              <Image source={img} alt="" style={styles.img} />
+              <Text>{i}</Text>
+            </View>
+          );
+        })}
+      </Swiper> */}
+    </>
   );
 };
 
@@ -56,8 +74,12 @@ const styles = StyleSheet.create({
     width: 298,
     borderRadius: 50,
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
   },
+  // img: {
+  //   width: 298,
+  //   height: 160,
+  // },
 });
 
 export default Banner;

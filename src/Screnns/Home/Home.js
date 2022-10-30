@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   Image,
   SafeAreaView,
   RefreshControl,
+  Animated,
 } from "react-native";
 import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
 import Rank from "./Rank";
@@ -52,7 +53,7 @@ const getLoc = () => {
 };
 
 const Home = ({ navigation, route }) => {
-  let locdata = getLoc();
+  // let locdata = getLoc();
   //마이페이지 카테도리에서 정보 받아오기
   var Gu = "";
   var Dong = "";
@@ -69,6 +70,7 @@ const Home = ({ navigation, route }) => {
   console.log(Gu, Dong, Category); //확인용
   //////
 
+  //리프레쉬
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -82,6 +84,7 @@ const Home = ({ navigation, route }) => {
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       {/*헤더*/}
+
       <View style={styles.Header}>
         <View style={styles.LogoBox}>
           <TouchableOpacity
@@ -96,11 +99,10 @@ const Home = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
-
       {/* 스크롤뷰 */}
 
       <ScrollView
-        // overScrollMode="never"
+        overScrollMode="never"
         // bounces={false}
         // bouncesZoom={false}
         refreshControl={
@@ -143,19 +145,12 @@ const Home = ({ navigation, route }) => {
               />
               <Text style={styles.SelectCategoryText}>이거유?</Text>
             </TouchableOpacity>
-            <FloatingBtn
-              navigation={() => navigation.navigate("Make", { loc: locdata })}
-            />
+            {/* <FloatingBtn navigation={() => navigation.navigate("Make")} /> */}
           </View>
           {/* 예시 */}
           <TouchableOpacity onPress={() => navigation.navigate("ListUp")}>
             <LostCard />
           </TouchableOpacity>
-          <LostCard />
-          <LostCard />
-          <LostCard />
-          <LostCard />
-          <LostCard />
         </View>
       </ScrollView>
     </View>
@@ -165,7 +160,6 @@ const Home = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   Header: {
     backgroundColor: "#5F7A61",
-    // justifyContent: "center",
   },
   LogoBox: {
     flexDirection: "row",
@@ -190,18 +184,18 @@ const styles = StyleSheet.create({
   tempArea: {
     width: 119,
     height: 27,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: "white",
-    borderRadius: 30,
-    alignSelf: "center",
-    marginVertical: 19,
+    // borderRadius: 30,
+    // alignSelf: "center",
+    // marginVertical: 19,
   },
   BannerTouchArea: {
     position: "absolute",
-    width: "20%",
-    marginTop: 190,
-    right: 60,
-    height: 20,
+    width: "21%",
+    marginTop: 155,
+    right: 70,
+    height: 30,
     // backgroundColor: "blue",
     // opacity: 0.6,
   },

@@ -10,7 +10,9 @@ const LostCard = () => {
         <Image source={{ uri: sampleImg }} alt="" style={styles.Img} />
       </View>
       <View style={styles.ContentBox}>
-        <Text style={styles.Title}>분실물 이름</Text>
+        <Text ellipsizeMode="tail" numberOfLines={1} style={styles.Title}>
+          분실물 이름
+        </Text>
         <Text style={styles.When}>00월00일 00시</Text>
         <Text style={styles.Where}>유성구 궁동</Text>
       </View>

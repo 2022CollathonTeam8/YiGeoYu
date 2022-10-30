@@ -14,11 +14,12 @@ const FloatingBtn = (props) => {
     //   {/* <Text style={styles.Plus}>+</Text> */}
     //   <Image source={images.addBtn} style={styles.Plus} alt="" />
     // </TouchableOpacity>
-    <TouchableOpacity style={styles.Main} onPress={props.navigation}>
-      <Image source={images.pencil} style={styles.Plus} alt="" />
+    // <TouchableOpacity style={styles.Main} onPress={props.navigation}>
+    //   <Image source={images.pencil} style={styles.Plus} alt="" />
 
-      <Text style={{ alignSelf: "center" }}> 글쓰기</Text>
-    </TouchableOpacity>
+    //   <Text style={{ alignSelf: "center" }}> 글쓰기</Text>
+    // </TouchableOpacity>
+    <Image source={images.addBtn} style={styles.Plus} alt="" />
   );
 };
 
@@ -36,9 +37,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Plus: {
-    width: 15,
-    height: 15,
-    alignSelf: "center",
+    // width: 15,
+    // height: 15,
+
+    // alignSelf: "center",
+    width: 45,
+    height: 45,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
   },
 });
 

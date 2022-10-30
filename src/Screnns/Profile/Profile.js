@@ -63,7 +63,10 @@ const Profile = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.ProfileTopStateBox}>
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("습득 물건");
+              }}
               style={[
                 styles.ProfileTopStateBoxInner,
                 { borderTopLeftRadius: 20, borderBottomLeftRadius: 20 },
@@ -71,12 +74,17 @@ const Profile = ({ navigation }) => {
             >
               <Text style={styles.ProfileTopStateBoxInnerTitle}>습득물건</Text>
               <Text style={styles.ProfileTopStateBoxInnerNum}>8</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.ProfileTopStateBoxInner}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("매칭 완료");
+              }}
+              style={styles.ProfileTopStateBoxInner}
+            >
               <Text style={styles.ProfileTopStateBoxInnerTitle}>매칭완료</Text>
               <Text style={styles.ProfileTopStateBoxInnerNum}>5</Text>
-            </View>
+            </TouchableOpacity>
 
             <View
               style={[
@@ -84,8 +92,8 @@ const Profile = ({ navigation }) => {
                 { borderTopRightRadius: 20, borderBottomRightRadius: 20 },
               ]}
             >
-              <Text style={styles.ProfileTopStateBoxInnerTitle}>거래후기</Text>
-              <Text style={styles.ProfileTopStateBoxInnerNum}>3</Text>
+              <Text style={styles.ProfileTopStateBoxInnerTitle}>거래온도</Text>
+              <Text style={styles.ProfileTopStateBoxInnerNum}>36.5℃</Text>
             </View>
           </View>
         </View>
@@ -227,7 +235,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 20,
     color: "#5F7A61",
   },
   CategoryBox: {

@@ -38,7 +38,7 @@ const temp_year = temp_trash.getFullYear();
 const temp_mon = temp_trash.getMonth() + 1;
 const temp_day = temp_trash.getDate();
 
-console.log(temp_trash);
+// console.log(temp_trash);
 
 const MakeItem = ({ navigation, route }) => {
   const [image, setImage] = useState(null);
@@ -66,7 +66,7 @@ const MakeItem = ({ navigation, route }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const [text, setText] = useState(temp_mon + "/" + temp_day + "/" + temp_year);
+  const [text, setText] = useState(temp_year + "/" + temp_mon + "/" + temp_day);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;

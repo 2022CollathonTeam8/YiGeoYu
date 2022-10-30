@@ -22,7 +22,10 @@ import {
   Profile,
   ChatList,
   ChatRoom,
+  GetItem,
+  Matching,
 } from "../Screnns";
+import images from "../../assets/images";
 import { FloatingBtn } from "../Components";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
@@ -63,7 +66,7 @@ const getLoc = () => {
 };
 
 const HomeStack = () => {
-  let locdae = getLoc();
+  // let locdae = getLoc();
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -137,6 +140,20 @@ const ProfileStack = () => {
         }}
       />
       <Stack.Screen
+        name="습득 물건"
+        component={GetItem}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="매칭 완료"
+        component={Matching}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -181,7 +198,7 @@ const ChatStack = () => {
 };
 //탭바
 const Navigation = () => {
-  let locdae = getLoc();
+  // let locdae = getLoc();
   return (
     <SafeAreaView style={styles.SafeAreaViewAnd}>
       <NavigationContainer>
@@ -204,7 +221,7 @@ const Navigation = () => {
                 return (
                   <MaterialCommunityIcons
                     name="home-outline"
-                    size={30}
+                    size={45}
                     color="black"
                   />
                 );
@@ -212,20 +229,21 @@ const Navigation = () => {
             }}
           />
 
-          {/* <Tab.Screen
+          <Tab.Screen
             name="MakeItem"
-            children={() => <MakeItem data={locdae} />}
-            // component={MakeItem}
+            // children={() => <MakeItem data={locdae} />}
+            component={MakeItem}
             // data={locdae}
+
             options={{
-              presentation: "transparentModal",
+              // presentation: "transparentModal",
               // headerTitleAlign: "center",
               // headerShown: true,
               tabBarIcon: () => {
                 return <FloatingBtn />;
               },
             }}
-          /> */}
+          />
           <Tab.Screen
             name="채팅"
             component={ChatStack}
@@ -239,7 +257,7 @@ const Navigation = () => {
                   >
                     <MaterialCommunityIcons
                       name="message-processing-outline"
-                      size={30}
+                      size={40}
                       color="black"
                     />
                   </View>
@@ -264,6 +282,11 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width * 0.1,
     resizeMode: "contain",
   },
+  // Plus: {
+  //   width: 15,
+  //   height: 15,
+  //   alignSelf: "center",
+  // },
 });
 
 export default Navigation;

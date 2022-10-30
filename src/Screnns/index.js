@@ -7,6 +7,8 @@ import Rank from "./Home/Rank";
 import Login from "./Profile/Login";
 import SignUp from "./Profile/SignUp";
 import Profile from "./Profile/Profile";
+import Matching from "./Profile/Matching";
+import GetItem from "./Profile/GetItem";
 
 import ChatList from "./Chat/ChatList";
 import ChatRoom from "./Chat/ChatRoom";
@@ -22,4 +24,6 @@ export {
   Profile,
   ChatList,
   ChatRoom,
+  Matching,
+  GetItem,
 };

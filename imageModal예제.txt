@@ -1,0 +1,15 @@
+<ImageModal
+  swipeToDismiss={false}
+  resizeMode="contain"
+  imageBackgroundColor="#000000"
+  style={{
+    width: imageWidth,
+    height: 250,
+  }}
+  source={{
+    uri:
+      'https://cdn.pixabay.com/photo/2018/01/11/09/52/three-3075752_960_720.jpg',
+  }}
+/>
+
+https://dev-yakuza.posstree.com/ko/react-native/react-native-image-modal/
