@@ -19,6 +19,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import images from "../../../assets";
+import { LostCard } from "../../Components";
 
 const Card = () => {
   return (
@@ -47,6 +48,8 @@ const ChatAlram = ({ navigation }) => {
   }, []);
 
   const [isChat, setIsChat] = useState(true);
+
+  const [isCheck, setIsCheck] = useState(0);
 
   return (
     <>
@@ -90,42 +93,40 @@ const ChatAlram = ({ navigation }) => {
       </View>
       <Image source={images.BottomCircle} style={styles.HeaderCircle} />
 
-      {isChat ? (
-        <ScrollView
-          overScrollMode="never"
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              style={{ backgroundColor: "#F8F8FA" }}
-            />
-          }
-          style={{ backgroundColor: "#F8F8FA" }}
-        >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </ScrollView>
-      ) : (
-        <>
-          <ScrollView
-            overScrollMode="never"
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                style={{ backgroundColor: "#F8F8FA" }}
-              />
-            }
+      <ScrollView
+        overScrollMode="never"
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
             style={{ backgroundColor: "#F8F8FA" }}
-          >
+          />
+        }
+        style={{ backgroundColor: "#F8F8FA" }}
+      >
+        {isChat ? (
+          <>
             <Card />
-          </ScrollView>
-        </>
-      )}
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </>
+        ) : (
+          <>
+            <View style={styles.KeyWordBox}>
+              <Text style={styles.KeyWordText}>알림 키워드 {isCheck}개</Text>
+              <TouchableOpacity style={styles.KeyWordSetBox}>
+                <Text style={styles.KeyWordSetText}>설정</Text>
+              </TouchableOpacity>
+            </View>
+            <LostCard />
+            <LostCard />
+            <LostCard />
+          </>
+        )}
+      </ScrollView>
     </>
   );
 };
@@ -185,6 +186,44 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 15,
     color: "#878B93",
+  },
+
+  KeyWordBox: {
+    flexDirection: "row",
+    paddingVertical: 20,
+    width: "80%",
+    marginLeft: "10%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  KeyWordText: {
+    fontWeight: "700",
+    fontSize: 18,
+    color: "#56C596",
+  },
+  KeyWordSetBox: {
+    borderRadius: 30,
+    backgroundColor: "#56C596",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.4,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
+  },
+  KeyWordSetText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
 

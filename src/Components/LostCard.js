@@ -15,7 +15,7 @@ const LostCard = () => {
             분실물 이름
           </Text>
           <Text style={styles.When}>00월00일 00시</Text>
-          <Text style={styles.Where}>유성구 궁동</Text>
+          {/* <Text style={styles.Where}>유성구 궁동</Text> */}
         </View>
       </View>
     </View>
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   Title: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
     paddingBottom: 5,
   },
   When: {
-    fontSize: 10,
+    fontSize: 13,
     color: "grey",
     paddingBottom: 5,
   },
