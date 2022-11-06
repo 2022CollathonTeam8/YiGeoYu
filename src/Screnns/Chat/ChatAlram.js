@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,9 +17,26 @@ import {
   MaterialIcons,
   Fontisto,
   MaterialCommunityIcons,
+  AntDesign,
+  FontAwesome,
+  FontAwesome5,
 } from "@expo/vector-icons";
 import images from "../../../assets";
 import { LostCard } from "../../Components";
+import { CategoryData, Daejeon } from "../../DBTEMP";
+
+const Item = ({ type, img, isfous }) => {
+  return (
+    <View style={styles.ItemBox}>
+      <Image style={styles.ItemBoxImg} source={img} alt="" />
+      {isfous ? (
+        <Text style={styles.ItemBoxTitleFocus}>{type}</Text>
+      ) : (
+        <Text style={styles.ItemBoxTitle}>{type}</Text>
+      )}
+    </View>
+  );
+};
 
 const Card = () => {
   return (
@@ -50,6 +67,16 @@ const ChatAlram = ({ navigation }) => {
   const [isChat, setIsChat] = useState(true);
 
   const [isCheck, setIsCheck] = useState(0);
+
+  const DumpData = CategoryData;
+  const [isShow, setIsShow] = useState(false);
+
+  const [isChoice, setIsChoice] = useState(DumpData);
+
+  const reset = () => {
+    setIsCheck(0);
+    setIsShow(true);
+  };
 
   return (
     <>
@@ -89,7 +116,6 @@ const ChatAlram = ({ navigation }) => {
         >
           <MaterialCommunityIcons name="window-close" size={30} color="black" />
         </TouchableOpacity>
-        {/* </View> */}
       </View>
       <Image source={images.BottomCircle} style={styles.HeaderCircle} />
 
@@ -117,7 +143,7 @@ const ChatAlram = ({ navigation }) => {
           <>
             <View style={styles.KeyWordBox}>
               <Text style={styles.KeyWordText}>알림 키워드 {isCheck}개</Text>
-              <TouchableOpacity style={styles.KeyWordSetBox}>
+              <TouchableOpacity style={styles.KeyWordSetBox} onPress={reset}>
                 <Text style={styles.KeyWordSetText}>설정</Text>
               </TouchableOpacity>
             </View>
@@ -127,6 +153,87 @@ const ChatAlram = ({ navigation }) => {
           </>
         )}
       </ScrollView>
+
+      <Modal
+        visible={isShow}
+        animationType={"slide"}
+        transparent={true}
+        onRequestClose={isShow}
+      >
+        <TouchableOpacity
+          style={styles.ModalClose}
+          onPress={() => setIsShow(false)}
+        ></TouchableOpacity>
+        {/* 모달 닫기 */}
+
+        <View style={styles.ModalContainer}>
+          <View style={styles.ModalHeader}>
+            <View style={styles.CategoryBox}>
+              <View style={{ width: 24 }}></View>
+            </View>
+            <Text style={styles.ModalHeaderTitle}>알림 키워드 설정</Text>
+            <TouchableOpacity
+              style={styles.CategoryBox}
+              onPress={() => setIsShow(false)}
+            >
+              <AntDesign name="close" size={25} color="black" />
+            </TouchableOpacity>
+          </View>
+          {/* // */}
+          <View style={styles.Type}>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <View style={{ flex: 1, alignItems: "center" }}>
+                {isChoice.map((data) => {
+                  //   if (data.id % 2 == 0) {
+                  return (
+                    <TouchableOpacity
+                      key={data.id}
+                      style={styles.ItemBox}
+                      onPress={() => {
+                        {
+                          console.log("변경 전 :", isChoice[data.id].focus),
+                            (isChoice[data.id].focus =
+                              !isChoice[data.id].focus),
+                            console.log("변경 후 :", isChoice[data.id].focus);
+                        }
+                      }}
+                    >
+                      <Image
+                        style={styles.ItemBoxImg}
+                        source={data.img}
+                        alt=""
+                      />
+                      {isChoice[data.id].focus ? (
+                        <Text style={styles.ItemBoxTitleFocus}>
+                          {data.type}
+                        </Text>
+                      ) : (
+                        <Text style={styles.ItemBoxTitle}>{data.type}</Text>
+                      )}
+                    </TouchableOpacity>
+                  );
+                  //   }
+                })}
+              </View>
+              {/* <View style={{ flex: 1, alignItems: "center" }}>
+                {DumpData.map((data) => {
+                  if (data.id % 2 == 1) {
+                    return (
+                      <TouchableOpacity key={data.id}>
+                        <Item type={data.type} img={data.img} />
+                      </TouchableOpacity>
+                    );
+                  }
+                })}
+              </View> */}
+            </View>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
@@ -224,6 +331,59 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "700",
+  },
+  ///////////////////
+  ModalContainer: {
+    position: "absolute",
+    top: Dimensions.get("screen").height * 0.2,
+    right: 30,
+    borderRadius: 30,
+    width: "80%",
+    padding: 10,
+    backgroundColor: "white",
+    opacity: 1,
+  },
+  ModalClose: {
+    flex: 1,
+    backgroundColor: "#929394",
+    opacity: 0.9,
+  },
+  ModalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ModalHeaderTitle: {
+    flex: 1,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "#56C596",
+  },
+  //////////
+  Type: {
+    marginTop: 10,
+  },
+  ItemBox: {
+    width: 109,
+    height: 24,
+    alignItems: "center",
+    flexDirection: "row",
+    marginBottom: 21,
+  },
+  ItemBoxImg: {
+    width: 24,
+    height: 24,
+  },
+  ItemBoxTitle: {
+    marginLeft: 10,
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  ItemBoxTitleFocus: {
+    marginLeft: 10,
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#56C596",
   },
 });
 

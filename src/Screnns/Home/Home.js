@@ -171,7 +171,6 @@ const Home = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   Header: {
     flexDirection: "row",
-    // backgroundColor: "#F8F8FA",
     backgroundColor: "white",
     height: 65,
     alignItems: "center",

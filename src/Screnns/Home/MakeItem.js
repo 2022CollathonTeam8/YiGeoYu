@@ -118,11 +118,11 @@ const MakeItem = ({ navigation, route }) => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="close" size={25} color="black" />
+          <AntDesign name="close" size={30} color="black" />
         </TouchableOpacity>
         <Text style={styles.Title}>습득물 신고</Text>
         <View style={styles.CategoryBox}>
-          <View style={{ width: 24 }}></View>
+          <AntDesign name="close" size={30} color="white" />
         </View>
       </View>
 
@@ -158,6 +158,7 @@ const MakeItem = ({ navigation, route }) => {
           <TextInput placeholder="글 제목" style={styles.TIT} />
           {/* <Text>{route.params.loc}</Text> */}
         </View>
+        <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
         <View style={styles.MakeMid}>
           <View style={styles.MakeMidFilterBox}>
             <TouchableOpacity
@@ -217,7 +218,7 @@ const MakeItem = ({ navigation, route }) => {
                     <AntDesign
                       name={isOpened ? "caretup" : "caretdown"}
                       size={10}
-                      color="#859B7B"
+                      color="#767676"
                     />
                   );
                 }}
@@ -248,7 +249,7 @@ const MakeItem = ({ navigation, route }) => {
                     <AntDesign
                       name={isOpened ? "caretup" : "caretdown"}
                       size={10}
-                      color="#859B7B"
+                      color="#767676"
                     />
                   );
                 }}
@@ -371,64 +372,58 @@ const MakeItem = ({ navigation, route }) => {
           style={styles.ModalClose}
           onPress={() => setIsShow(false)}
         ></TouchableOpacity>
-        <View style={{ backgroundColor: "#B3B3B4" }}>
-          <View style={styles.ModalContainer}>
-            <View style={styles.ModalHeader}>
-              <View style={styles.CategoryBox}>
-                <View style={{ width: 24 }}></View>
-              </View>
-              <Text style={styles.ModalHeaderTitle}>카테고리 선택</Text>
-              <TouchableOpacity
-                style={styles.CategoryBox}
-                onPress={() => setIsShow(false)}
-              >
-                <AntDesign name="close" size={25} color="black" />
-              </TouchableOpacity>
+
+        <View style={styles.ModalContainer}>
+          <View style={styles.ModalHeader}>
+            <View style={styles.CategoryBox}>
+              <View style={{ width: 24 }}></View>
             </View>
-            {/* // */}
-            <View style={styles.Type}>
-              <View
-                style={{
-                  flexDirection: "row",
-                }}
-              >
-                <View style={{ flex: 1, alignItems: "center" }}>
-                  {DumpData.map((data) => {
-                    if (data.id % 2 == 0) {
-                      return (
-                        <TouchableOpacity
-                          key={data.id}
-                          onPress={() => func_choice(data)}
-                        >
-                          <Item type={data.type} img={data.img} />
-                        </TouchableOpacity>
-                      );
-                    }
-                  })}
-                </View>
-                <View style={{ flex: 1, alignItems: "center" }}>
-                  {DumpData.map((data) => {
-                    if (data.id % 2 == 1) {
-                      return (
-                        <TouchableOpacity
-                          key={data.id}
-                          onPress={() => func_choice(data)}
-                        >
-                          <Item type={data.type} img={data.img} />
-                        </TouchableOpacity>
-                      );
-                    }
-                  })}
-                </View>
+            <Text style={styles.ModalHeaderTitle}>카테고리 선택</Text>
+            <TouchableOpacity
+              style={styles.CategoryBox}
+              onPress={() => setIsShow(false)}
+            >
+              <AntDesign name="close" size={25} color="black" />
+            </TouchableOpacity>
+          </View>
+          {/* // */}
+          <View style={styles.Type}>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <View style={{ flex: 1, alignItems: "center" }}>
+                {DumpData.map((data) => {
+                  if (data.id % 2 == 0) {
+                    return (
+                      <TouchableOpacity
+                        key={data.id}
+                        onPress={() => func_choice(data)}
+                      >
+                        <Item type={data.type} img={data.img} />
+                      </TouchableOpacity>
+                    );
+                  }
+                })}
+              </View>
+              <View style={{ flex: 1, alignItems: "center" }}>
+                {DumpData.map((data) => {
+                  if (data.id % 2 == 1) {
+                    return (
+                      <TouchableOpacity
+                        key={data.id}
+                        onPress={() => func_choice(data)}
+                      >
+                        <Item type={data.type} img={data.img} />
+                      </TouchableOpacity>
+                    );
+                  }
+                })}
               </View>
             </View>
           </View>
         </View>
-
-        <TouchableOpacity
-          style={styles.ModalClose}
-          onPress={() => setIsShow(false)}
-        ></TouchableOpacity>
       </Modal>
     </>
   );
@@ -436,20 +431,25 @@ const MakeItem = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   Header: {
-    backgroundColor: "white",
     flexDirection: "row",
+    backgroundColor: "white",
+    height: 65,
     alignItems: "center",
+    justifyContent: "space-between",
   },
   Title: {
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 15,
-    color: "#5F7A61",
+    fontSize: 20,
   },
   CategoryBox: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 24,
     paddingVertical: 10,
+  },
+  HeaderCircle: {
+    width: "100%",
+    reiszeMode: "stretch",
   },
 
   ////////////
@@ -457,22 +457,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     paddingTop: 29,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
   },
 
   IMGBtn: {
@@ -505,7 +489,7 @@ const styles = StyleSheet.create({
   },
   MakeMidFilterText: {
     fontSize: 20,
-    color: "#5F7A61",
+    color: "#56C596",
     fontWeight: "bold",
   },
   MakeMidFiltered: {
@@ -553,13 +537,12 @@ const styles = StyleSheet.create({
   DateSelectBoxText: {
     // marginLeft: 10,
     fontSize: 15,
-    color: "#5F7A61",
+    color: "#767676",
     fontWeight: "bold",
   },
   ///////////
   ProfileMidText: {
     fontSize: 15,
-    color: "#5F7A61",
     fontWeight: "bold",
   },
   ProfileMidSelectBox: {
@@ -589,7 +572,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderColor: "#D9D9D9",
   },
-  dropdown1BtnTxtStyle: { color: "#859B7B", textAlign: "left", fontSize: 13 },
+  dropdown1BtnTxtStyle: { color: "#767676", textAlign: "left", fontSize: 13 },
   dropdown1DropdownStyle: { backgroundColor: "#EFEFEF" },
   dropdown1RowStyle: {
     backgroundColor: "#EFEFEF",
@@ -604,8 +587,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#EBEBEB",
   },
   QuesTitle: {
-    color: "#5F7A61",
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "600",
   },
   Input: {
@@ -633,7 +615,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   Btn: {
-    backgroundColor: "#5F7A61",
+    backgroundColor: "#56C596",
     width: 75,
     height: 28,
     borderRadius: 30,
@@ -649,18 +631,19 @@ const styles = StyleSheet.create({
   },
   ///////////////
   ModalContainer: {
-    alignSelf: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    position: "absolute",
+    top: Dimensions.get("screen").height * 0.2,
+    right: 30,
     borderRadius: 30,
     width: "80%",
     padding: 10,
+    backgroundColor: "white",
+    opacity: 1,
   },
   ModalClose: {
-    flex: 3,
-    height: 300,
+    flex: 1,
     backgroundColor: "#929394",
-    opacity: 0.7,
+    opacity: 0.9,
   },
   ModalHeader: {
     flexDirection: "row",
