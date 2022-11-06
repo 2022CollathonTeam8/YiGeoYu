@@ -13,7 +13,11 @@ import {
   RefreshControl,
   Animated,
 } from "react-native";
-import { MaterialIcons, Fontisto } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  Fontisto,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import images from "../../../assets";
 
 const Card = () => {
@@ -30,7 +34,7 @@ const Card = () => {
   );
 };
 
-const ChatList = ({ navigation }) => {
+const ChatAlram = ({ navigation }) => {
   //리프레쉬
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -42,44 +46,86 @@ const ChatList = ({ navigation }) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const [isChat, setIsChat] = useState(true);
+
   return (
     <>
-      {/*헤더*/}
+      {/*헤더 */}
 
       <View style={styles.Header}>
         {/* <View style={styles.LogoBox}> */}
-        <View style={styles.CategoryBox}>
+        <View
+          style={styles.CategoryBox}
+          onPress={() => navigation.navigate("ProfileStack")}
+        >
           <MaterialIcons name="menu" size={30} color="white" />
         </View>
-        <Text style={styles.Title}>채팅</Text>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => setIsChat(true)}
+        >
+          {isChat ? (
+            <Text style={styles.Title}>채팅알림</Text>
+          ) : (
+            <Text style={styles.UnTitle}>채팅알림</Text>
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => setIsChat(false)}
+        >
+          {isChat ? (
+            <Text style={styles.UnTitle}>키워드 알림</Text>
+          ) : (
+            <Text style={styles.Title}>키워드 알림</Text>
+          )}
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.CategoryBox}
-          onPress={() => navigation.navigate("ChatAll")}
+          onPress={() => navigation.goBack()}
         >
-          <Fontisto name="bell" size={30} color="black" />
+          <MaterialCommunityIcons name="window-close" size={30} color="black" />
         </TouchableOpacity>
         {/* </View> */}
       </View>
-      <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
+      <Image source={images.BottomCircle} style={styles.HeaderCircle} />
 
-      <ScrollView
-        overScrollMode="never"
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
+      {isChat ? (
+        <ScrollView
+          overScrollMode="never"
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              style={{ backgroundColor: "#F8F8FA" }}
+            />
+          }
+          style={{ backgroundColor: "#F8F8FA" }}
+        >
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </ScrollView>
+      ) : (
+        <>
+          <ScrollView
+            overScrollMode="never"
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                style={{ backgroundColor: "#F8F8FA" }}
+              />
+            }
             style={{ backgroundColor: "#F8F8FA" }}
-          />
-        }
-        style={{ backgroundColor: "#F8F8FA" }}
-      >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </ScrollView>
+          >
+            <Card />
+          </ScrollView>
+        </>
+      )}
     </>
   );
 };
@@ -101,9 +147,14 @@ const styles = StyleSheet.create({
   },
 
   Title: {
-    flex: 1,
     textAlign: "center",
     fontWeight: "bold",
+    fontSize: 20,
+    // color: "#5F7A61",
+  },
+  UnTitle: {
+    textAlign: "center",
+    fontWeight: "400",
     fontSize: 20,
     // color: "#5F7A61",
   },
@@ -137,4 +188,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChatList;
+export default ChatAlram;

@@ -1,11 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+  Image,
+} from "react-native";
 import {
   AntDesign,
   FontAwesome,
   MaterialIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
+import { LostCard } from "../../Components";
+import images from "../../../assets/images";
 const Matching = ({ navigation }) => {
   return (
     <>
@@ -18,22 +28,23 @@ const Matching = ({ navigation }) => {
               navigation.goBack();
             }}
           >
-            <AntDesign name="left" size={25} color="#5F7A61" />
+            <AntDesign name="left" size={30} color="black" />
           </TouchableOpacity>
           <Text
             ellipsizeMode="tail"
             numberOfLines={1}
             style={styles.HeaderTitle}
           >
-            매칭 완료
+            매칭완료
           </Text>
           {/* 영역용 */}
           <View style={styles.CategoryBox}>
-            {/* <View style={{ width: 25, height: 25 }}></View> */}
+            <AntDesign name="left" size={30} color="white" />
           </View>
           {/* 영역용 */}
         </View>
       </View>
+      <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
 
       <View>
         <Text>Matching</Text>
@@ -45,6 +56,10 @@ const Matching = ({ navigation }) => {
 const styles = StyleSheet.create({
   Header: {
     backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 65,
   },
   HeaderBox: {
     flexDirection: "row",
@@ -52,7 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   HeaderTitle: {
-    color: "#5F7A61",
     fontSize: 20,
     fontWeight: "bold",
     flex: 8,
@@ -60,12 +74,13 @@ const styles = StyleSheet.create({
   },
 
   CategoryBox: {
-    // width: 100,
-    flex: 1,
-    height: 50,
-    paddingHorizontal: 15,
+    paddingHorizontal: 24,
     paddingVertical: 10,
     // backgroundColor: "red",
+  },
+  HeaderCircle: {
+    width: "100%",
+    reiszeMode: "stretch",
   },
   //////////////
 });

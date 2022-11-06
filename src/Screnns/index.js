@@ -9,9 +9,11 @@ import SignUp from "./Profile/SignUp";
 import Profile from "./Profile/Profile";
 import Matching from "./Profile/Matching";
 import GetItem from "./Profile/GetItem";
+import Setting from "./Profile/Setting";
 
 import ChatList from "./Chat/ChatList";
 import ChatRoom from "./Chat/ChatRoom";
+import ChatAlram from "./Chat/ChatAlram";
 
 export {
   Home,
@@ -24,6 +26,8 @@ export {
   Profile,
   ChatList,
   ChatRoom,
+  ChatAlram,
   Matching,
   GetItem,
+  Setting,
 };

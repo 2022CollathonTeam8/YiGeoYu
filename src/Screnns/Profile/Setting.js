@@ -17,7 +17,7 @@ import {
 import { LostCard } from "../../Components";
 import images from "../../../assets/images";
 
-const GetItem = ({ navigation }) => {
+const Setting = ({ navigation }) => {
   //리프레쉬
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -46,7 +46,7 @@ const GetItem = ({ navigation }) => {
             numberOfLines={1}
             style={styles.HeaderTitle}
           >
-            습득 물건
+            설정
           </Text>
           {/* 영역용 */}
           <View style={styles.CategoryBox}>
@@ -64,10 +64,42 @@ const GetItem = ({ navigation }) => {
         }
         style={styles.MidArea}
       >
-        <LostCard />
-        <LostCard />
-        <LostCard />
-        <LostCard />
+        <View style={styles.ProfileBox}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image source={images.profile} />
+            <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 5 }}>
+              "이름"님
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#EDEDED",
+              paddingVertical: 5,
+              paddingHorizontal: 3,
+              borderRadius: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "500", color: "#767676", fontSize: 15 }}>
+              프로필 편집
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.Box}>
+          <Text style={styles.BoxTitle}>알림 설정</Text>
+          <Text style={styles.BoxContent}>채팅 알림</Text>
+          <Text style={styles.BoxContent}>키워드 알림</Text>
+        </View>
+
+        <View style={styles.Box}>
+          <Text style={styles.BoxTitle}>사용자 설정</Text>
+          <Text style={styles.BoxContent}>계정/정보 관리</Text>
+        </View>
+        <View style={styles.Box}>
+          <Text style={styles.BoxTitle}>기타</Text>
+          <Text style={styles.BoxContent}>공지사항</Text>
+          <Text style={styles.BoxContent}>로그아웃</Text>
+          <Text style={styles.BoxContent}>탈퇴</Text>
+        </View>
       </ScrollView>
     </>
   );
@@ -105,7 +137,37 @@ const styles = StyleSheet.create({
   //////////////
 
   MidArea: {
-    backgroundColor: "white",
+    backgroundColor: "#F8F8FA",
+  },
+  ///////
+
+  ProfileBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "80%",
+    paddingVertical: 20,
+    marginLeft: "10%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#EBEBEB",
+  },
+  Box: {
+    width: "80%",
+    paddingVertical: 20,
+    marginLeft: "10%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#EBEBEB",
+  },
+  BoxTitle: {
+    fontWeight: "700",
+    fontSize: 18,
+    paddingBottom: 20,
+  },
+  BoxContent: {
+    fontWeight: "500",
+    fontSize: 18,
+    color: "#767676",
+    paddingBottom: 20,
   },
 });
-export default GetItem;
+export default Setting;

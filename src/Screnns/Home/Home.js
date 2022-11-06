@@ -14,8 +14,8 @@ import {
   Animated,
 } from "react-native";
 import { Banner, CategoryItem, LostCard, FloatingBtn } from "../../Components";
-import Rank from "./Rank";
-import { MaterialIcons } from "@expo/vector-icons";
+import * as Progress from "react-native-progress";
+import { MaterialIcons, Fontisto } from "@expo/vector-icons";
 import images from "../../../assets";
 import * as Location from "expo-location";
 
@@ -82,22 +82,25 @@ const Home = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={{ backgroundColor: "white", flex: 1 }}>
+    <>
       {/*헤더*/}
 
       <View style={styles.Header}>
-        <View style={styles.LogoBox}>
-          <TouchableOpacity
-            style={styles.CategoryBox}
-            onPress={() => navigation.navigate("ProfileStack")}
-          >
-            <MaterialIcons name="menu" size={25} color="white" />
-          </TouchableOpacity>
-          <Image source={images.Icon2} style={styles.logo} />
-          <TouchableOpacity style={styles.CategoryBox} onPress={() => {}}>
-            <MaterialIcons name="search" size={25} color="white" />
-          </TouchableOpacity>
-        </View>
+        {/* <View style={styles.LogoBox}> */}
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => navigation.navigate("ProfileStack")}
+        >
+          <MaterialIcons name="menu" size={30} color="black" />
+        </TouchableOpacity>
+        <Image source={images.Icon2} style={styles.logo} />
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => navigation.navigate("ChatAl")}
+        >
+          <Fontisto name="bell" size={30} color="black" />
+        </TouchableOpacity>
+        {/* </View> */}
       </View>
       {/* 스크롤뷰 */}
 
@@ -109,20 +112,30 @@ const Home = ({ navigation, route }) => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            style={{ backgroundColor: "#5F7A61" }}
+            style={{ backgroundColor: "#F8F8FA" }}
           />
         }
+        style={{ backgroundColor: "#F8F8FA" }}
       >
         <View style={styles.Banner}>
-          <View style={styles.tempArea}></View>
+          <View style={styles.ProgressBarBox}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.ProgressBarText}>17건 성사</Text>
+              <Text style={styles.ProgressBarText}>90oz</Text>
+            </View>
+            <Progress.Bar
+              progress={70 / 100}
+              width={null}
+              height={8}
+              color="#3BCD9E"
+              backgroundColor="#81DABB"
+            />
+          </View>
           <Banner />
+          <Image source={images.BottomCircle} style={styles.BottomCircle} />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Event");
-          }}
-          style={styles.BannerTouchArea}
-        ></TouchableOpacity>
 
         <View
           style={{
@@ -135,7 +148,6 @@ const Home = ({ navigation, route }) => {
               onPress={() => navigation.navigate("ProfileStack")}
               style={{
                 flexDirection: "row",
-                flex: 4,
               }}
             >
               <Image
@@ -145,7 +157,6 @@ const Home = ({ navigation, route }) => {
               />
               <Text style={styles.SelectCategoryText}>이거유?</Text>
             </TouchableOpacity>
-            {/* <FloatingBtn navigation={() => navigation.navigate("Make")} /> */}
           </View>
           {/* 예시 */}
           <TouchableOpacity onPress={() => navigation.navigate("ListUp")}>
@@ -153,90 +164,92 @@ const Home = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   Header: {
-    backgroundColor: "#5F7A61",
+    flexDirection: "row",
+    // backgroundColor: "#F8F8FA",
+    backgroundColor: "white",
+    height: 65,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   LogoBox: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: "blue",
   },
 
   logo: {
-    width: 34,
-    height: 34,
+    width: 29,
+    height: 45,
   },
   CategoryBox: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 24,
     paddingVertical: 10,
   },
 
   ////////////////////
 
   ///////////
-  tempArea: {
-    width: 119,
-    height: 27,
-    // borderWidth: 1,
-    borderColor: "white",
-    // borderRadius: 30,
-    // alignSelf: "center",
-    // marginVertical: 19,
-  },
-  BannerTouchArea: {
-    position: "absolute",
-    width: "21%",
-    marginTop: 155,
-    right: 70,
-    height: 30,
-    // backgroundColor: "blue",
-    // opacity: 0.6,
-  },
 
   Banner: {
-    backgroundColor: "#5F7A61",
-    paddingBottom: 19,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
+    // backgroundColor: "#F8F8FA",
+    backgroundColor: "white",
+    paddingTop: 20,
   },
+
+  ProgressBarBox: {
+    alignSelf: "center",
+    justifyContent: "center",
+    width: "60%",
+    marginBottom: 10,
+  },
+  ProgressBarText: {
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 18,
+    lineHeight: 20,
+    color: "#56C596",
+    marginBottom: 5,
+  },
+  BottomCircle: {
+    marginTop: 20,
+    width: "100%",
+    reiszeMode: "stretch",
+  },
+
+  // BannerTouchArea: {
+  //   position: "absolute",
+  //   width: "21%",
+  //   marginTop: 155,
+  //   right: 70,
+  //   height: 30,
+  //   backgroundColor: "blue",
+  //   opacity: 0.6,
+  // },
 
   /////////////
   SelectCategoryBox: {
     height: 50,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   SelectCategoryImg: {
-    width: 30,
-    height: 30,
+    width: 32,
+    height: 32,
     marginRight: 5,
-    resizeMode: "contain",
+    alignSelf: "center",
   },
   SelectCategoryText: {
     fontWeight: "700",
-    fontSize: 15,
-    color: "#5F7A61",
+    fontSize: 32,
+    color: "#56C596",
     alignSelf: "center",
   },
 });

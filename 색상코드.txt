@@ -1,0 +1,24 @@
+배경 바탕색 : "#F8F8FA"
+
+글자 색 : "#56C596"
+
+회색 글자색 : 767676
+
+#F8F8FA 
+
+그림자
+
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: "#000",
+    //     shadowOffset: {
+    //       width: 0,
+    //       height: 2,
+    //     },
+    //     shadowOpacity: 0.25,
+    //     shadowRadius: 3.84,
+    //   },
+    //   android: {
+    //     elevation: 5,
+    //   },
+    // }),

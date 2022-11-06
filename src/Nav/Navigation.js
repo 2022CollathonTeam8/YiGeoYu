@@ -23,11 +23,17 @@ import {
   ChatList,
   ChatRoom,
   GetItem,
+  Setting,
+  ChatAlram,
   Matching,
 } from "../Screnns";
 import images from "../../assets/images";
 import { FloatingBtn } from "../Components";
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Ionicons,
+} from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import * as Location from "expo-location";
@@ -91,6 +97,14 @@ const HomeStack = () => {
         // }}
       />
       <Stack.Screen
+        name="ChatAl"
+        component={ChatAlram}
+        // options={{
+        //   headerTitleAlign: "center",
+        //   headerShown: true,
+        // }}
+      />
+      <Stack.Screen
         name="Event"
         component={Event}
         options={({ navigation }) => ({
@@ -147,6 +161,13 @@ const ProfileStack = () => {
         }}
       />
       <Stack.Screen
+        name="설정"
+        component={Setting}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
         name="매칭 완료"
         component={Matching}
         options={{
@@ -177,6 +198,7 @@ const ChatStack = () => {
       initialRouteName="ChatList"
       screenOptions={{
         headerBackTitleVisible: false,
+        headerShown: false,
       }}
     >
       <Stack.Screen
@@ -193,6 +215,14 @@ const ChatStack = () => {
           headerTitleAlign: "center",
         }}
       />
+      <Stack.Screen
+        name="ChatAll"
+        component={ChatAlram}
+        // options={{
+        //   headerTitleAlign: "center",
+        //   headerShown: true,
+        // }}
+      />
     </Stack.Navigator>
   );
 };
@@ -208,7 +238,7 @@ const Navigation = () => {
             headerShown: false,
             tabBarShowLabel: false,
             tabBarStyle: {
-              // height: 55,
+              height: 55,
               // backgroundColor: "red",
             },
           }}
@@ -219,11 +249,16 @@ const Navigation = () => {
             options={{
               tabBarIcon: () => {
                 return (
-                  <MaterialCommunityIcons
-                    name="home-outline"
-                    size={45}
-                    color="black"
-                  />
+                  <View
+                    style={{
+                      marginLeft: Dimensions.get("screen").width * 0.1,
+                      width: Dimensions.get("screen").width * 0.3,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Ionicons name="home-outline" size={30} color="black" />
+                  </View>
                 );
               },
             }}
@@ -240,7 +275,17 @@ const Navigation = () => {
               // headerTitleAlign: "center",
               // headerShown: true,
               tabBarIcon: () => {
-                return <FloatingBtn />;
+                return (
+                  <View
+                    style={{
+                      width: Dimensions.get("screen").width * 0.3,
+                      // backgroundColor: "red",
+                      alignItems: "center",
+                    }}
+                  >
+                    <FloatingBtn />
+                  </View>
+                );
               },
             }}
           />
@@ -251,13 +296,16 @@ const Navigation = () => {
               tabBarIcon: () => {
                 return (
                   <View
-                  // style={{
-                  //   marginRight: Dimensions.get("screen").width * 0.2,
-                  // }}
+                    style={{
+                      marginRight: Dimensions.get("screen").width * 0.1,
+                      width: Dimensions.get("screen").width * 0.3,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
-                    <MaterialCommunityIcons
-                      name="message-processing-outline"
-                      size={40}
+                    <Ionicons
+                      name="chatbox-ellipses-outline"
+                      size={30}
                       color="black"
                     />
                   </View>

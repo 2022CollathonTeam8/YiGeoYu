@@ -16,6 +16,11 @@ const images = {
   necklace: require("./img/necklace.png"),
   IMGBtn: require("./img/IMGBtn.png"),
   pencil: require("./img/pencil.png"),
+  banner1: require("./img/banner1.png"),
+  banner2: require("./img/banner2.png"),
+  BottomCircle: require("./img/BottomCircle.png"),
+  HeaderBottomCircle: require("./img/HeaderBottomCircle.png"),
+  heart: require("./img/heart.png"),
 };
 
 export default images;

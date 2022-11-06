@@ -1,19 +1,33 @@
 import React, { useState } from "react";
 import Swiper from "react-native-swiper";
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Platform,
+} from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import imagesDB from "../../assets/images";
 
 const Banner = () => {
   const images = [
-    "https://source.unsplash.com/1024x768/?nature",
-    "https://source.unsplash.com/1024x768/?water",
-    "https://source.unsplash.com/1024x768/?tree",
-    "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+    // "https://source.unsplash.com/1024x768/?nature",
+    // "https://source.unsplash.com/1024x768/?water",
+    // "https://source.unsplash.com/1024x768/?tree",
+    // "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+    imagesDB.banner1,
+    imagesDB.banner2,
   ];
 
   const [state, setState] = useState(1);
   return (
-    <>
+    <View
+      style={{
+        height: 160,
+      }}
+    >
       <SliderBox
         autoplay={false}
         circleLoop={false}
@@ -30,12 +44,12 @@ const Banner = () => {
           setState(index + 1);
         }}
       />
-
+      <View style={styles.test}></View>
       <View
         style={{
           position: "absolute",
-          bottom: 25,
-          right: 75,
+          bottom: 0,
+          right: 50,
           paddingTop: 4,
           paddingBottom: 4,
           paddingHorizontal: 10,
@@ -44,42 +58,50 @@ const Banner = () => {
         }}
       >
         <Text style={{ fontSize: 10, color: "#ffffff" }}>
-          {state}/{images.length} 모두보기
+          {state}/{images.length}
         </Text>
       </View>
-      {/* <Swiper
-        autoplay
-        showsPagination={false}
-        width={298}
-        height={160}
-        autoplayTimeout={3}
-      >
-        {images.map((img, i) => {
-          return (
-            <View key={i} style={{ backgroundColor: "red" }}>
-              {console.log(img)}
-              <Image source={img} alt="" style={styles.img} />
-              <Text>{i}</Text>
-            </View>
-          );
-        })}
-      </Swiper> */}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   banner: {
-    // width: "90%",
-    width: 298,
-    borderRadius: 50,
-    borderColor: "white",
-    borderWidth: 2,
+    width: "80%",
+    height: "100%",
+    resizeMode: "stretch",
   },
-  // img: {
-  //   width: 298,
-  //   height: 160,
-  // },
+  test: {
+    // backgroundColor: "blue",
+    backgroundColor: "#c2c2c2",
+    opacity: 0.2,
+    marginHorizontal: "10%",
+    borderBottomStartRadius: 20,
+    borderBottomEndRadius: 20,
+    zIndex: -1,
+    position: "absolute",
+    bottom: -5,
+    width: "80%",
+    height: "90%",
+    justifyContent: "center",
+    alignItems: "center",
+    // alignSelf: "center",
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: "#000",
+    //     shadowOffset: {
+    //       width: 0,
+    //       height: 10,
+    //     },
+    //     shadowOpacity: 0.6,
+    //     // shadowRadius: 3.84,
+    //     shadowRadius: 5,
+    //   },
+    //   android: {
+    //     elevation: 5,
+    //   },
+    // }),
+  },
 });
 
 export default Banner;

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import images from "../../../assets/images";
 import SelectDropdown from "react-native-select-dropdown";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 import { CategoryData, Daejeon } from "../../DBTEMP";
 
 const Item = ({ type, img }) => {
@@ -41,36 +41,46 @@ const Profile = ({ navigation }) => {
             navigation.goBack();
           }}
         >
-          <AntDesign name="close" size={25} color="black" />
+          <AntDesign name="close" size={30} color="black" />
         </TouchableOpacity>
         <Text style={styles.Title}>마이페이지</Text>
-        <View style={styles.CategoryBox}>
-          <View style={{ width: 24 }}></View>
-        </View>
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => {
+            navigation.navigate("설정");
+          }}
+        >
+          <SimpleLineIcons name="settings" size={30} color="black" />
+        </TouchableOpacity>
       </View>
 
-      <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+      <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
+
+      {/*  */}
+      <ScrollView style={{ flex: 1, backgroundColor: "#F8F8FA" }}>
         <View style={styles.ProfileTop}>
-          <View style={styles.ProfileTopImgBox}>
-            <Image
-              source={images.profile}
-              alt=""
-              style={styles.ProfileTopImg}
-            />
-            <View style={styles.ProfileTopTextBox}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 10,
+            }}
+          >
+            <View style={styles.ProfileTopImgBox}>
+              <Image source={images.profile} alt="" />
               <Text style={styles.ProfileTopText}>"이름"님</Text>
-              <Text style={styles.ProfileTopText}>(습득등급)</Text>
             </View>
+            <Image source={images.heart} />
+            <Text style={styles.ProfileHeartText1}>온정부피</Text>
+            <Text style={styles.ProfileHeartText2}>8oz</Text>
           </View>
+
           <View style={styles.ProfileTopStateBox}>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("습득 물건");
               }}
-              style={[
-                styles.ProfileTopStateBoxInner,
-                { borderTopLeftRadius: 20, borderBottomLeftRadius: 20 },
-              ]}
+              style={styles.ProfileTopStateBoxInner}
             >
               <Text style={styles.ProfileTopStateBoxInnerTitle}>습득물건</Text>
               <Text style={styles.ProfileTopStateBoxInnerNum}>8</Text>
@@ -85,18 +95,9 @@ const Profile = ({ navigation }) => {
               <Text style={styles.ProfileTopStateBoxInnerTitle}>매칭완료</Text>
               <Text style={styles.ProfileTopStateBoxInnerNum}>5</Text>
             </TouchableOpacity>
-
-            <View
-              style={[
-                styles.ProfileTopStateBoxInner,
-                { borderTopRightRadius: 20, borderBottomRightRadius: 20 },
-              ]}
-            >
-              <Text style={styles.ProfileTopStateBoxInnerTitle}>거래온도</Text>
-              <Text style={styles.ProfileTopStateBoxInnerNum}>36.5℃</Text>
-            </View>
           </View>
         </View>
+        <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
 
         <View style={styles.ProfileMid}>
           <Text style={styles.ProfileMidText}>위치설정</Text>
@@ -125,7 +126,7 @@ const Profile = ({ navigation }) => {
                   <AntDesign
                     name={isOpened ? "caretup" : "caretdown"}
                     size={10}
-                    color="#859B7B"
+                    color="#767676"
                   />
                 );
               }}
@@ -156,7 +157,7 @@ const Profile = ({ navigation }) => {
                   <AntDesign
                     name={isOpened ? "caretup" : "caretdown"}
                     size={10}
-                    color="#859B7B"
+                    color="#767676"
                   />
                 );
               }}
@@ -230,105 +231,79 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    height: 65,
   },
   Title: {
     flex: 1,
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
-    color: "#5F7A61",
+    // color: "#5F7A61",
   },
   CategoryBox: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 24,
     paddingVertical: 10,
+  },
+  HeaderCircle: {
+    width: "100%",
+    reiszeMode: "stretch",
   },
 
   ////////////
   ProfileTop: {
-    width: "100%",
-    height: 282,
-    borderBottomStartRadius: 30,
-    borderBottomEndRadius: 30,
+    paddingVertical: 20,
     backgroundColor: "white",
     alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
+    justifyContent: "center",
   },
   ProfileTopImgBox: {
-    paddingTop: 13,
-    height: 156,
-    justifyContent: "center",
     alignItems: "center",
   },
-  ProfileTopImg: {
-    width: 62,
-    height: 62,
-  },
-  ProfileTopTextBox: {
-    width: 133,
-    height: 52,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 2,
-  },
+
   ProfileTopText: {
-    color: "#5F7A61",
     fontSize: 15,
     fontWeight: "bold",
   },
+
+  ProfileHeartText1: {
+    paddingHorizontal: 15,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#767676",
+    marginBottom: 10,
+  },
+  ProfileHeartText2: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#56C596",
+    marginBottom: 10,
+  },
   ProfileTopStateBox: {
-    width: 345,
-    height: 87,
-    backgroundColor: "white",
-    borderRadius: 20,
-    borderColor: "#EBEBEB",
+    width: "100%",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
+    justifyContent: "space-evenly",
+    paddingVertical: 10,
   },
   ProfileTopStateBoxInner: {
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
-    flex: 1,
-    borderWidth: 1,
     borderColor: "#EBEBEB",
+    backgroundColor: "#EDEDED",
+    height: 77,
+    width: 111,
+    borderRadius: 10,
+    padding: 10,
   },
   ProfileTopStateBoxInnerTitle: {
-    color: "#c9c9c9",
+    color: "#767676",
     fontWeight: "800",
-    fontSize: 17,
+    fontSize: 16,
   },
   ProfileTopStateBoxInnerNum: {
-    color: "#859B7B",
+    color: "#56C596",
     fontWeight: "800",
-    fontSize: 17,
+    fontSize: 20,
   },
   ProfileMid: {
     width: Dimensions.get("screen").width - 48,
@@ -340,26 +315,12 @@ const styles = StyleSheet.create({
   },
   ProfileMidText: {
     fontSize: 15,
-    color: "#5F7A61",
+    color: "#56C596",
     fontWeight: "bold",
   },
   ProfileMidSelectBox: {
     flexDirection: "row",
     width: "100%",
-  },
-  ProfileMidSaveBtn: {
-    marginLeft: 70,
-    width: 74,
-    height: 30,
-    backgroundColor: "#5F7A61",
-    justifyContent: "center",
-    borderRadius: 30,
-  },
-  ProfileMidSaveBtnText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
   },
 
   ///////////////
@@ -370,7 +331,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderColor: "#D9D9D9",
   },
-  dropdown1BtnTxtStyle: { color: "#859B7B", textAlign: "left", fontSize: 13 },
+  dropdown1BtnTxtStyle: { color: "#767676", textAlign: "left", fontSize: 15 },
   dropdown1DropdownStyle: { backgroundColor: "#EFEFEF" },
   dropdown1RowStyle: {
     backgroundColor: "#EFEFEF",
@@ -387,7 +348,7 @@ const styles = StyleSheet.create({
   },
   ProfileBotTitle: {
     fontSize: 15,
-    color: "#5F7A61",
+    color: "#56C596",
     fontWeight: "bold",
   },
 
