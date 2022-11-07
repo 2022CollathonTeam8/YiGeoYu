@@ -40,6 +40,7 @@ const Item = ({ type, img, isfous }) => {
   );
 };
 
+//채팅쪽
 const Card = ({ click }) => {
   return (
     <>
@@ -68,19 +69,26 @@ const ChatAlram = ({ navigation }) => {
 
   const [isChat, setIsChat] = useState(true);
 
+  //키워드 개수
   const [isCheck, setIsCheck] = useState(0);
-
+  //데이터 변수
   const DumpData = CategoryData;
+  //모달 켜기
   const [isShow, setIsShow] = useState(false);
-
-  const [isChoice, setIsChoice] = useState(DumpData);
-
-  const reset = () => {
-    setIsCheck(0);
-    setIsShow(true);
-  };
   const [isShow2, setIsShow2] = useState(false);
   const [addQuiz, setAddQuiz] = useState(false);
+
+  const [isbag, Fbag] = useState(false);
+  const [islaptop, Flaptop] = useState(false);
+  const [iswallet, Fwallet] = useState(false);
+  const [isbook, Fbook] = useState(false);
+  const [isumbrella, Fumbrella] = useState(false);
+  const [isshirt, Fshirt] = useState(false);
+  const [iscosmetics, Fcosmetics] = useState(false);
+  const [isnecklace, Fnecklace] = useState(false);
+  const [iscap, Fcap] = useState(false);
+  const [iscard, Fcard] = useState(false);
+  const [isany, Fany] = useState(false);
 
   return (
     <>
@@ -137,17 +145,15 @@ const ChatAlram = ({ navigation }) => {
         {isChat ? (
           <>
             <Card click={() => setIsShow2(true)} />
-            {/* <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card /> */}
           </>
         ) : (
           <>
             <View style={styles.KeyWordBox}>
               <Text style={styles.KeyWordText}>알림 키워드 {isCheck}개</Text>
-              <TouchableOpacity style={styles.KeyWordSetBox} onPress={reset}>
+              <TouchableOpacity
+                style={styles.KeyWordSetBox}
+                onPress={() => setIsShow(true)}
+              >
                 <Text style={styles.KeyWordSetText}>설정</Text>
               </TouchableOpacity>
             </View>
@@ -413,56 +419,302 @@ const ChatAlram = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           {/* // */}
-          <View style={styles.Type}>
+          <View style={{ flexDirection: "row", flex: 1 }}>
             <View
               style={{
-                flexDirection: "row",
+                flex: 1,
+                alignItems: "center",
               }}
             >
-              <View style={{ flex: 1, alignItems: "center" }}>
-                {isChoice.map((data) => {
-                  //   if (data.id % 2 == 0) {
-                  return (
-                    <TouchableOpacity
-                      key={data.id}
-                      style={styles.ItemBox}
-                      onPress={() => {
-                        {
-                          console.log("변경 전 :", isChoice[data.id].focus),
-                            (isChoice[data.id].focus =
-                              !isChoice[data.id].focus),
-                            console.log("변경 후 :", isChoice[data.id].focus);
-                        }
-                      }}
-                    >
-                      <Image
-                        style={styles.ItemBoxImg}
-                        source={data.img}
-                        alt=""
-                      />
-                      {isChoice[data.id].focus ? (
-                        <Text style={styles.ItemBoxTitleFocus}>
-                          {data.type}
-                        </Text>
-                      ) : (
-                        <Text style={styles.ItemBoxTitle}>{data.type}</Text>
-                      )}
-                    </TouchableOpacity>
-                  );
-                  //   }
-                })}
-              </View>
-              {/* <View style={{ flex: 1, alignItems: "center" }}>
-                {DumpData.map((data) => {
-                  if (data.id % 2 == 1) {
-                    return (
-                      <TouchableOpacity key={data.id}>
-                        <Item type={data.type} img={data.img} />
-                      </TouchableOpacity>
-                    );
-                  }
-                })}
-              </View> */}
+              {/* 한세트 */}
+              {isbag ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fbag(!isbag);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.bag} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>가방</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fbag(!isbag);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.bag} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>가방</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {islaptop ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Flaptop(!islaptop);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.laptop} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>디지털 기기</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Flaptop(!islaptop);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.laptop} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>디지털 기기</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {iswallet ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fwallet(!iswallet);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.wallet} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>지갑</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fwallet(!iswallet);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.wallet} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>지갑</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {isbook ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fbook(!isbook);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.book} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>도서</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fbook(!isbook);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.book} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>도서</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {isumbrella ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fumbrella(!isumbrella);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.umbrella} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>우산</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fumbrella(!isumbrella);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.umbrella} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>우산</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {isshirt ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fshirt(!isshirt);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.shirt} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>의류</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fshirt(!isshirt);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.shirt} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>의류</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={{ flex: 1, alignItems: "center" }}>
+              {/*  */}
+              {iscosmetics ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcosmetics(!iscosmetics);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.cosmetics} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>화장품</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcosmetics(!iscosmetics);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.cosmetics} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>화장품</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {isnecklace ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fnecklace(!isnecklace);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.necklace} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>악세사리</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fnecklace(!isnecklace);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.necklace} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>악세사리</Text>
+                </TouchableOpacity>
+              )}
+
+              {/*  */}
+              {iscap ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcap(!iscap);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.cap} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>잡화</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcap(!iscap);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.cap} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>잡화</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {iscard ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcard(!iscard);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.card} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>카드/신분증</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fcard(!iscard);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.card} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>카드/신분증</Text>
+                </TouchableOpacity>
+              )}
+              {/*  */}
+              {isany ? (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fany(!isany);
+                    setIsCheck(isCheck - 1);
+                  }}
+                >
+                  <Image source={images.box} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitleFocus}>기타</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.ItemBox}
+                  onPress={() => {
+                    Fany(!isany);
+                    setIsCheck(isCheck + 1);
+                  }}
+                >
+                  <Image source={images.box} style={styles.ItemBoxImg} />
+
+                  <Text style={styles.ItemBoxTitle}>기타</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>
@@ -649,11 +901,12 @@ const styles = StyleSheet.create({
   ///////////////////
   ModalContainer: {
     position: "absolute",
-    top: Dimensions.get("screen").height * 0.2,
-    right: 30,
+    // top: Dimensions.get("screen").height * 0.2,
+    bottom: 0,
     borderRadius: 30,
-    width: "80%",
-    padding: 10,
+    width: "100%",
+    paddingTop: 10,
+    paddingBottom: 20,
     backgroundColor: "white",
     opacity: 1,
   },
