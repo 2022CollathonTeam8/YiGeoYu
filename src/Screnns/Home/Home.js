@@ -94,13 +94,12 @@ const Home = ({ navigation, route }) => {
           <MaterialIcons name="menu" size={30} color="black" />
         </TouchableOpacity>
         <Image source={images.Icon2} style={styles.logo} />
-        <TouchableOpacity
+        <View
           style={styles.CategoryBox}
-          onPress={() => navigation.navigate("ChatAl")}
+          // onPress={() => navigation.navigate("ChatAl")}
         >
-          <Fontisto name="bell" size={30} color="black" />
-        </TouchableOpacity>
-        {/* </View> */}
+          <Fontisto name="bell" size={30} color="white" />
+        </View>
       </View>
       {/* 스크롤뷰 */}
 

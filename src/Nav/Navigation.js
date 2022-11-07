@@ -26,6 +26,8 @@ import {
   Setting,
   ChatAlram,
   Matching,
+  ChatThanks,
+  ChatRoomSample,
 } from "../Screnns";
 import images from "../../assets/images";
 import { FloatingBtn } from "../Components";
@@ -96,14 +98,14 @@ const HomeStack = () => {
         //   headerShown: true,
         // }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="ChatAl"
         component={ChatAlram}
-        // options={{
-        //   headerTitleAlign: "center",
-        //   headerShown: true,
-        // }}
-      />
+        options={{
+          headerTitleAlign: "center",
+          headerShown: true,
+        }}
+      /> */}
       <Stack.Screen
         name="Event"
         component={Event}
@@ -201,28 +203,11 @@ const ChatStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="ChatList"
-        component={ChatList}
-        options={{
-          headerTitleAlign: "center",
-        }}
-      />
-      <Stack.Screen
-        name="ChatRoom"
-        component={ChatRoom}
-        options={{
-          headerTitleAlign: "center",
-        }}
-      />
-      <Stack.Screen
-        name="ChatAll"
-        component={ChatAlram}
-        // options={{
-        //   headerTitleAlign: "center",
-        //   headerShown: true,
-        // }}
-      />
+      <Stack.Screen name="ChatList" component={ChatList} />
+      <Stack.Screen name="ChatRoomSample" component={ChatRoomSample} />
+      <Stack.Screen name="ChatRoom" component={ChatRoom} />
+      <Stack.Screen name="ChatThanks" component={ChatThanks} />
+      <Stack.Screen name="ChatAll" component={ChatAlram} />
     </Stack.Navigator>
   );
 };
@@ -266,10 +251,7 @@ const Navigation = () => {
 
           <Tab.Screen
             name="MakeItem"
-            // children={() => <MakeItem data={locdae} />}
             component={MakeItem}
-            // data={locdae}
-
             options={{
               // presentation: "transparentModal",
               // headerTitleAlign: "center",
@@ -293,6 +275,7 @@ const Navigation = () => {
             name="채팅"
             component={ChatStack}
             options={{
+              tabBarStyle: { display: "none" },
               tabBarIcon: () => {
                 return (
                   <View
@@ -330,11 +313,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width * 0.1,
     resizeMode: "contain",
   },
-  // Plus: {
-  //   width: 15,
-  //   height: 15,
-  //   alignSelf: "center",
-  // },
 });
 
 export default Navigation;

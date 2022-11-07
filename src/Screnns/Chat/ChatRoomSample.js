@@ -26,128 +26,8 @@ import {
 } from "@expo/vector-icons";
 import images from "../../../assets";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
-import { LostCard } from "../../Components";
-import { CategoryData, Daejeon } from "../../DBTEMP";
 
-const Getter = ({ navback }) => {
-  const [isShow, setIsShow] = useState(false);
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-        marginTop: 20,
-        paddingBottom: 20,
-        borderBottomColor: "#EBEBEB",
-        borderBottomWidth: 1,
-      }}
-    >
-      <View style={{ flexDirection: "row" }}>
-        <Image source={images.sampleBox} />
-        <View
-          style={{
-            justifyContent: "center",
-            marginLeft: 10,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "700",
-              marginBottom: 5,
-            }}
-          >
-            mlb모자
-          </Text>
-          <Text
-            style={{
-              fontSize: 15,
-              color: "#878B93",
-            }}
-          >
-            어은동 1일전
-          </Text>
-        </View>
-      </View>
-
-      <TouchableOpacity
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onPress={() => setIsShow(true)}
-      >
-        <View
-          style={{
-            justifyContent: "center",
-            backgroundColor: "#56C596",
-            borderRadius: 20,
-            paddingHorizontal: 20,
-            paddingVertical: 10,
-          }}
-        >
-          <Text
-            style={{
-              color: "white",
-              fontSize: 18,
-              fontWeight: "700",
-            }}
-          >
-            거래성사
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      <Modal
-        visible={isShow}
-        animationType={"slide"}
-        transparent={true}
-        onRequestClose={isShow}
-      >
-        <TouchableOpacity
-          style={styles.ModalClose}
-          onPress={() => setIsShow(false)}
-        ></TouchableOpacity>
-
-        <View style={styles.ModalContainer}>
-          <View style={styles.ModalHeader}>
-            <TouchableOpacity
-              style={styles.ModalHeaderTitle}
-              onPress={() => setIsShow(false)}
-            >
-              <AntDesign name="close" size={25} color="black" />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image source={images.profile} />
-            <Text>'분실자 닉네임'님과</Text>
-            <Text style={{ fontSize: 18 }}>분실물을 주고 받았습니까?</Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "#56C596",
-                borderRadius: 20,
-                marginVertical: 20,
-                paddingVertical: 15,
-                paddingHorizontal: 40,
-              }}
-              onPress={navback}
-            >
-              <Text style={{ fontSize: 18, color: "white" }}>완료</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    </View>
-  );
-};
-
-const ChatRoom = ({ navigation }) => {
+const ChatRoomSample = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -204,7 +84,7 @@ const ChatRoom = ({ navigation }) => {
     );
   };
   const [isShow, setIsShow] = useState(false);
-  const [isFin, setIsFin] = useState(true);
+  const [isFin, setIsFIn] = useState(false);
   return (
     <View style={{ backgroundColor: "#F8F8FA", flex: 1 }}>
       <View style={styles.Header}>
@@ -214,14 +94,12 @@ const ChatRoom = ({ navigation }) => {
         >
           <AntDesign name="left" size={30} color="black" />
         </TouchableOpacity>
-        <Text style={styles.Title}>'닉네임'</Text>
+        <Text style={styles.Title}>'닉네임dkdk'</Text>
         <View style={styles.CategoryBox}>
           <Fontisto name="bell" size={30} color="white" />
         </View>
       </View>
       <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
-
-      {/* <Getter navback={() => navigation.navigate("ChatList")} /> */}
 
       <View
         style={{
@@ -262,33 +140,67 @@ const ChatRoom = ({ navigation }) => {
           </View>
         </View>
 
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          onPress={() => setIsShow(true)}
-        >
-          <View
+        {isFin ? (
+          <TouchableOpacity
             style={{
               justifyContent: "center",
-              backgroundColor: "#56C596",
-              borderRadius: 20,
-              paddingHorizontal: 20,
-              paddingVertical: 10,
+              alignItems: "center",
+            }}
+            onPress={() => {
+              navigation.navigate("ChatThanks");
             }}
           >
-            <Text
+            <View
               style={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: "700",
+                justifyContent: "center",
+                backgroundColor: "#56C596",
+                borderRadius: 20,
+                paddingHorizontal: 20,
+                paddingVertical: 10,
               }}
             >
-              거래성사
-            </Text>
-          </View>
-        </TouchableOpacity>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 18,
+                  fontWeight: "700",
+                }}
+              >
+                감사인사
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => {
+              setIsShow(true);
+            }}
+          >
+            <View
+              style={{
+                justifyContent: "center",
+                backgroundColor: "#56C596",
+                borderRadius: 20,
+                paddingHorizontal: 20,
+                paddingVertical: 10,
+              }}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 18,
+                  fontWeight: "700",
+                }}
+              >
+                감사인사
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
 
         <Modal
           visible={isShow}
@@ -317,36 +229,22 @@ const ChatRoom = ({ navigation }) => {
               }}
             >
               <Image source={images.profile} />
-              <Text>'분실자 닉네임'님과</Text>
-              <Text style={{ fontSize: 18 }}>분실물을 주고 받았습니까?</Text>
-
-              {isFin ? (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#56C596",
-                    borderRadius: 20,
-                    marginVertical: 20,
-                    paddingVertical: 15,
-                    paddingHorizontal: 40,
-                  }}
-                  onPress={() => navigation.navigate("ChatList")}
-                >
-                  <Text style={{ fontSize: 18, color: "white" }}>완료</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#56C596",
-                    borderRadius: 20,
-                    marginVertical: 20,
-                    paddingVertical: 15,
-                    paddingHorizontal: 40,
-                  }}
-                  onPress={() => setIsShow(false)}
-                >
-                  <Text style={{ fontSize: 18, color: "white" }}>완료</Text>
-                </TouchableOpacity>
-              )}
+              <Text>'분실자 닉네임'님께서</Text>
+              <Text style={{ fontSize: 18 }}>
+                아직 거래 완료를 하지 않으셨습니다.
+              </Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#56C596",
+                  borderRadius: 20,
+                  marginVertical: 20,
+                  paddingVertical: 15,
+                  paddingHorizontal: 40,
+                }}
+                onPress={() => setIsShow(false)}
+              >
+                <Text style={{ fontSize: 18, color: "white" }}>완료</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>
@@ -399,7 +297,6 @@ const styles = StyleSheet.create({
     reiszeMode: "stretch",
   },
   /////////
-  ///////////////
   ModalContainer: {
     position: "absolute",
     bottom: 0,
@@ -426,4 +323,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChatRoom;
+export default ChatRoomSample;

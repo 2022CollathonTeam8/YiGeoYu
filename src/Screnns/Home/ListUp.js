@@ -19,53 +19,58 @@ import {
   FontAwesome,
   MaterialIcons,
   FontAwesome5,
+  SimpleLineIcons,
 } from "@expo/vector-icons";
 
 const ListUp = ({ navigation }) => {
+  // const [image, isImage] = useState(null);
   const [image, isImage] = useState("a");
 
   return (
     <>
       {/* //////HEADER////// */}
       <View style={styles.Header}>
-        <View style={styles.HeaderBox}>
-          <TouchableOpacity
-            style={styles.CategoryBox}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <AntDesign name="close" size={25} color="white" />
-          </TouchableOpacity>
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={styles.HeaderTitle}
-          >
-            제목 제목 제목 제목 제목 제목 제목 제목
-          </Text>
-          {/* 영역용 */}
-          <View style={styles.CategoryBox}>
-            {/* <View style={{ width: 25, height: 25 }}></View> */}
-          </View>
-          {/* 영역용 */}
-        </View>
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <AntDesign name="close" size={30} color="black" />
+        </TouchableOpacity>
+        <Text ellipsizeMode="tail" numberOfLines={1} style={styles.Title}>
+          제목 제목 제목 제목 제목 제목 제목 제목
+        </Text>
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => {
+            navigation.navigate("설정");
+          }}
+        >
+          <SimpleLineIcons name="settings" size={30} color="white" />
+        </TouchableOpacity>
       </View>
 
-      <ScrollView bounces={false} style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView
+        bounces={false}
+        style={{ flex: 1, backgroundColor: "#F8F8FA" }}
+      >
         <View style={styles.TopArea}>
-          <View style={styles.ImgBoxError}>
-            {image != null && (
+          <View>
+            {image != null ? (
               <ImageModal
                 swipeToDismiss={false}
                 resizeMode="contain"
-                imageBackgroundColor="#5F7A61"
+                imageBackgroundColor="white"
                 source={require("./dog.png")}
                 style={styles.ImgBox}
               />
+            ) : (
+              <View style={styles.ImgBoxError}></View>
             )}
           </View>
         </View>
+        <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
 
         <View style={styles.MidArea}>
           <View style={styles.ProfileBox}>
@@ -74,15 +79,19 @@ const ListUp = ({ navigation }) => {
               <Text
                 style={{ paddingBottom: 5, fontSize: 18, fontWeight: "bold" }}
               >
-                습득자 닉네임
+                닉네임
               </Text>
-              <Text>장소 시간</Text>
+              <Text style={{ color: "#767676", fontSize: 15 }}>
+                어은동 1일전
+              </Text>
             </View>
           </View>
           <View style={styles.InfoArea}>
             <Text style={styles.InfoText}>
-              작성 답변은 습득자에게 전달됩니다. 채팅 연결은 답변을 본 습득자의
-              판단에 따라 결정됩니다.
+              작성 답변은 습득자에게 전달됩니다.
+            </Text>
+            <Text style={styles.InfoText}>
+              채팅 연결은 답변을 본 습득자의 판단에 따라 결정됩니다.
             </Text>
           </View>
 
@@ -155,66 +164,48 @@ const ListUp = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   Header: {
-    backgroundColor: "#5F7A61",
-  },
-  HeaderBox: {
+    backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    height: 65,
   },
-  HeaderTitle: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-    flex: 8,
+  Title: {
+    flex: 1,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    // color: "#5F7A61",
+  },
+  CategoryBox: {
+    paddingHorizontal: 24,
+    paddingVertical: 10,
+  },
+  HeaderCircle: {
+    width: "100%",
+    reiszeMode: "stretch",
   },
 
-  CategoryBox: {
-    // width: 100,
-    flex: 1,
-    height: 50,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    // backgroundColor: "red",
-  },
   //////////////
 
   TopArea: {
-    backgroundColor: "#5F7A61",
+    backgroundColor: "white",
+    paddingVertical: 20,
+    justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 29,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
   },
 
   ImgBoxError: {
-    width: Dimensions.get("screen").width * 0.9,
-    height: Dimensions.get("screen").height * 0.4,
-    // backgroundColor: "#D9D9D9",
-    backgroundColor: "red",
+    backgroundColor: "#D9D9D9",
+    width: 293,
+    height: 226,
   },
   ImgBox: {
-    width: Dimensions.get("screen").width * 0.9,
-    // height: Dimensions.get("screen").height * 0.5,
-    // height: Dimensions.get("screen").height * 0.5,
-    height: "100%",
-    resizeMode: "stretch",
+    width: Dimensions.get("window").width * 0.8,
+    height: 226,
+    resizeMode: "contain",
   },
+
   ItemTitle: {
     marginTop: 16,
     width: 288,
@@ -255,7 +246,7 @@ const styles = StyleSheet.create({
     marginVertical: 34,
   },
   InfoText: {
-    color: "#C9C9C9",
+    color: "#56C596",
   },
   QuesBox: {
     paddingBottom: 20,
@@ -263,7 +254,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#EBEBEB",
   },
   QuesTitle: {
-    color: "#5F7A61",
     fontSize: 15,
     fontWeight: "600",
   },
@@ -294,9 +284,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   Btn: {
-    backgroundColor: "#5F7A61",
+    backgroundColor: "#56C596",
     width: 75,
-    height: 28,
+    // height: 28,
+    paddingVertical: 10,
     borderRadius: 30,
     alignSelf: "center",
     justifyContent: "center",

@@ -19,6 +19,7 @@ import {
   FontAwesome,
   MaterialIcons,
   FontAwesome5,
+  Feather,
 } from "@expo/vector-icons";
 import images from "../../../assets/images";
 import { CategoryData, Daejeon } from "../../DBTEMP";
@@ -47,7 +48,7 @@ const MakeItem = ({ navigation, route }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      // aspect: [16, 9],
       quality: 1,
     });
 
@@ -108,6 +109,10 @@ const MakeItem = ({ navigation, route }) => {
     setIsShow(false);
   };
 
+  // const testfuntction = () => {
+  //   setIsShow(true).then({},pickImage);
+  // };
+
   return (
     <>
       {/* //////HEADER////// */}
@@ -128,28 +133,19 @@ const MakeItem = ({ navigation, route }) => {
 
       {/* /////////////////// */}
 
-      <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView style={{ flex: 1, backgroundColor: "#F8F8FA" }}>
         <View style={styles.TopArea}>
           <TouchableOpacity onPress={pickImage}>
             {image ? (
               <>
                 <Image
                   source={{ uri: image }}
-                  style={{ width: 79, height: 79, resizeMode: "stretch" }}
-                />
-                <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
+                    width: 293,
+                    height: 226,
+                    resizeMode: "stretch",
                   }}
-                >
-                  <TouchableOpacity onPress={pickImage}>
-                    <AntDesign name="camera" size={20} color="black" />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => setImage(null)}>
-                    <FontAwesome name="undo" size={20} color="black" />
-                  </TouchableOpacity>
-                </View>
+                />
               </>
             ) : (
               <Image source={images.IMGBtn} alt="" style={styles.IMGBtn} />
@@ -311,7 +307,6 @@ const MakeItem = ({ navigation, route }) => {
                   </TouchableOpacity>
                 </View>
               )}
-              {console.log(show)}
             </View>
           </View>
           {/* // */}
@@ -617,7 +612,8 @@ const styles = StyleSheet.create({
   Btn: {
     backgroundColor: "#56C596",
     width: 75,
-    height: 28,
+    // height: 28,
+    paddingVertical: 10,
     borderRadius: 30,
     alignSelf: "center",
     justifyContent: "center",
@@ -632,13 +628,13 @@ const styles = StyleSheet.create({
   ///////////////
   ModalContainer: {
     position: "absolute",
-    top: Dimensions.get("screen").height * 0.2,
-    right: 30,
+    bottom: 0,
     borderRadius: 30,
-    width: "80%",
+    width: "100%",
     padding: 10,
     backgroundColor: "white",
     opacity: 1,
+    paddingBottom: 30,
   },
   ModalClose: {
     flex: 1,
@@ -654,7 +650,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
-    color: "#5F7A61",
+    color: "#56C596",
   },
 
   //////////

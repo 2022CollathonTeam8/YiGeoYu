@@ -21,6 +21,10 @@ const images = {
   BottomCircle: require("./img/BottomCircle.png"),
   HeaderBottomCircle: require("./img/HeaderBottomCircle.png"),
   heart: require("./img/heart.png"),
+  getter: require("./img/getter.png"),
+  sampleBox: require("./img/SampleBox.png"),
+  thanksBottom: require("./img/thanksBottom.png"),
+  thankheart: require("./img/thankheart.png"),
 };
 
 export default images;

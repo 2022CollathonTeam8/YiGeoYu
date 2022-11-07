@@ -13,20 +13,18 @@ import {
   RefreshControl,
   Animated,
 } from "react-native";
-import { MaterialIcons, Fontisto } from "@expo/vector-icons";
+import { MaterialIcons, Fontisto, AntDesign } from "@expo/vector-icons";
 import images from "../../../assets";
 
-const Card = () => {
+const Card = ({ nav }) => {
   return (
-    <>
-      <TouchableOpacity style={styles.CardBox}>
-        <Image source={images.profile} />
-        <View style={{ justifyContent: "center", marginLeft: 10 }}>
-          <Text style={styles.CardTitle}>mlb 모자</Text>
-          <Text style={styles.CardSub}>어은동 1일전</Text>
-        </View>
-      </TouchableOpacity>
-    </>
+    <TouchableOpacity style={styles.CardBox} onPress={nav}>
+      <Image source={images.profile} />
+      <View style={{ justifyContent: "center", marginLeft: 10 }}>
+        <Text style={styles.CardTitle}>mlb 모자</Text>
+        <Text style={styles.CardSub}>어은동 1일전</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -48,9 +46,12 @@ const ChatList = ({ navigation }) => {
 
       <View style={styles.Header}>
         {/* <View style={styles.LogoBox}> */}
-        <View style={styles.CategoryBox}>
-          <MaterialIcons name="menu" size={30} color="white" />
-        </View>
+        <TouchableOpacity
+          style={styles.CategoryBox}
+          onPress={() => navigation.goBack()}
+        >
+          <AntDesign name="left" size={30} color="black" />
+        </TouchableOpacity>
         <Text style={styles.Title}>채팅</Text>
         <TouchableOpacity
           style={styles.CategoryBox}
@@ -73,8 +74,9 @@ const ChatList = ({ navigation }) => {
         }
         style={{ backgroundColor: "#F8F8FA" }}
       >
-        <Card />
-        <Card />
+        <Card nav={() => navigation.navigate("ChatRoom")} />
+
+        <Card nav={() => navigation.navigate("ChatRoomSample")} />
         <Card />
         <Card />
         <Card />
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
   },
 
   CardTitle: {
-    fontWeight: "500",
+    fontWeight: "700",
     fontSize: 15,
     marginBottom: 5,
   },

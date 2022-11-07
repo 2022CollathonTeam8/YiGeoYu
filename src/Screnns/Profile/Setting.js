@@ -18,16 +18,6 @@ import { LostCard } from "../../Components";
 import images from "../../../assets/images";
 
 const Setting = ({ navigation }) => {
-  //리프레쉬
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
-  const [refreshing, setRefreshing] = React.useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
   return (
     <>
       {/* //////HEADER////// */}
@@ -57,13 +47,7 @@ const Setting = ({ navigation }) => {
       </View>
       <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
 
-      <ScrollView
-        overScrollMode="never"
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        style={styles.MidArea}
-      >
+      <ScrollView style={styles.MidArea}>
         <View style={styles.ProfileBox}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image source={images.profile} />

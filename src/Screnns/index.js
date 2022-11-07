@@ -13,7 +13,9 @@ import Setting from "./Profile/Setting";
 
 import ChatList from "./Chat/ChatList";
 import ChatRoom from "./Chat/ChatRoom";
+import ChatRoomSample from "./Chat/ChatRoomSample";
 import ChatAlram from "./Chat/ChatAlram";
+import ChatThanks from "./Chat/ChatThanks";
 
 export {
   Home,
@@ -30,4 +32,6 @@ export {
   Matching,
   GetItem,
   Setting,
+  ChatThanks,
+  ChatRoomSample,
 };
