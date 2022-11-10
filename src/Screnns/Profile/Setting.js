@@ -52,7 +52,7 @@ const Setting = ({ navigation }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image source={images.profile} />
             <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 5 }}>
-              "이름"님
+              "타몽"님
             </Text>
           </View>
           <TouchableOpacity

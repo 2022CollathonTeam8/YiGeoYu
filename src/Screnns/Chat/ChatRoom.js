@@ -29,124 +29,6 @@ import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { LostCard } from "../../Components";
 import { CategoryData, Daejeon } from "../../DBTEMP";
 
-const Getter = ({ navback }) => {
-  const [isShow, setIsShow] = useState(false);
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-        marginTop: 20,
-        paddingBottom: 20,
-        borderBottomColor: "#EBEBEB",
-        borderBottomWidth: 1,
-      }}
-    >
-      <View style={{ flexDirection: "row" }}>
-        <Image source={images.sampleBox} />
-        <View
-          style={{
-            justifyContent: "center",
-            marginLeft: 10,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "700",
-              marginBottom: 5,
-            }}
-          >
-            mlb모자
-          </Text>
-          <Text
-            style={{
-              fontSize: 15,
-              color: "#878B93",
-            }}
-          >
-            어은동 1일전
-          </Text>
-        </View>
-      </View>
-
-      <TouchableOpacity
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onPress={() => setIsShow(true)}
-      >
-        <View
-          style={{
-            justifyContent: "center",
-            backgroundColor: "#56C596",
-            borderRadius: 20,
-            paddingHorizontal: 20,
-            paddingVertical: 10,
-          }}
-        >
-          <Text
-            style={{
-              color: "white",
-              fontSize: 18,
-              fontWeight: "700",
-            }}
-          >
-            거래성사
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      <Modal
-        visible={isShow}
-        animationType={"slide"}
-        transparent={true}
-        onRequestClose={isShow}
-      >
-        <TouchableOpacity
-          style={styles.ModalClose}
-          onPress={() => setIsShow(false)}
-        ></TouchableOpacity>
-
-        <View style={styles.ModalContainer}>
-          <View style={styles.ModalHeader}>
-            <TouchableOpacity
-              style={styles.ModalHeaderTitle}
-              onPress={() => setIsShow(false)}
-            >
-              <AntDesign name="close" size={25} color="black" />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image source={images.profile} />
-            <Text>'분실자 닉네임'님과</Text>
-            <Text style={{ fontSize: 18 }}>분실물을 주고 받았습니까?</Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "#56C596",
-                borderRadius: 20,
-                marginVertical: 20,
-                paddingVertical: 15,
-                paddingHorizontal: 40,
-              }}
-              onPress={navback}
-            >
-              <Text style={{ fontSize: 18, color: "white" }}>완료</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    </View>
-  );
-};
-
 const ChatRoom = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
@@ -214,14 +96,12 @@ const ChatRoom = ({ navigation }) => {
         >
           <AntDesign name="left" size={30} color="black" />
         </TouchableOpacity>
-        <Text style={styles.Title}>'닉네임'</Text>
+        <Text style={styles.Title}>'타몽'</Text>
         <View style={styles.CategoryBox}>
           <Fontisto name="bell" size={30} color="white" />
         </View>
       </View>
       <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
-
-      {/* <Getter navback={() => navigation.navigate("ChatList")} /> */}
 
       <View
         style={{
@@ -235,7 +115,7 @@ const ChatRoom = ({ navigation }) => {
         }}
       >
         <View style={{ flexDirection: "row" }}>
-          <Image source={images.sampleBox} />
+          <Image source={images.lostbag} style={styles.cardImg} />
           <View
             style={{
               justifyContent: "center",
@@ -249,7 +129,7 @@ const ChatRoom = ({ navigation }) => {
                 marginBottom: 5,
               }}
             >
-              mlb모자
+              가방
             </Text>
             <Text
               style={{
@@ -257,7 +137,7 @@ const ChatRoom = ({ navigation }) => {
                 color: "#878B93",
               }}
             >
-              어은동 1일전
+              11월 10일 2일전
             </Text>
           </View>
         </View>
@@ -317,7 +197,7 @@ const ChatRoom = ({ navigation }) => {
               }}
             >
               <Image source={images.profile} />
-              <Text>'분실자 닉네임'님과</Text>
+              <Text>'타몽'님과</Text>
               <Text style={{ fontSize: 18 }}>분실물을 주고 받았습니까?</Text>
 
               {isFin ? (
@@ -423,6 +303,12 @@ const styles = StyleSheet.create({
   ModalHeaderTitle: {
     paddingHorizontal: 24,
     paddingVertical: 10,
+  },
+  cardImg: {
+    width: 58,
+    height: 58,
+    borderRadius: 5,
+    resizeMode: "contain",
   },
 });
 

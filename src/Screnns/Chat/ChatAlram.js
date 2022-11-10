@@ -47,8 +47,8 @@ const Card = ({ click }) => {
       <TouchableOpacity style={styles.CardBox} onPress={click}>
         <Image source={images.profile} />
         <View style={{ justifyContent: "center", marginLeft: 10 }}>
-          <Text style={styles.CardTitle}>mlb 모자</Text>
-          <Text style={styles.CardSub}>어은동 1일전</Text>
+          <Text style={styles.CardTitle}>가방</Text>
+          <Text style={styles.CardSub}>온천1동 0일전</Text>
         </View>
       </TouchableOpacity>
     </>
@@ -129,7 +129,7 @@ const ChatAlram = ({ navigation }) => {
           <MaterialCommunityIcons name="window-close" size={30} color="black" />
         </TouchableOpacity>
       </View>
-      <Image source={images.BottomCircle} style={styles.HeaderCircle} />
+      <Image source={images.HeaderBottomCircle} style={styles.HeaderCircle} />
 
       <ScrollView
         overScrollMode="never"
@@ -157,9 +157,36 @@ const ChatAlram = ({ navigation }) => {
                 <Text style={styles.KeyWordSetText}>설정</Text>
               </TouchableOpacity>
             </View>
-            <LostCard />
-            <LostCard />
-            <LostCard />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
+            <LostCard
+              name={"더미데이터"}
+              time={"00월 00일 0일전"}
+              imagetype={images.sampleBox}
+            />
           </>
         )}
       </ScrollView>
@@ -178,11 +205,7 @@ const ChatAlram = ({ navigation }) => {
             setAddQuiz(false);
           }}
         ></TouchableOpacity>
-        <View
-          // bounces={false}
-          // overScrollMode="never"
-          style={styless.ModalContainer}
-        >
+        <View style={styless.ModalContainer}>
           <ScrollView>
             <View style={styless.ModalHeader}>
               <TouchableOpacity
@@ -201,9 +224,9 @@ const ChatAlram = ({ navigation }) => {
                 <Image source={images.profile} style={styless.ModalImg} />
                 <View style={{ marginLeft: 10 }}>
                   <Text style={{ fontSize: 15, fontWeight: "700" }}>
-                    mlb 모자
+                    타몽22
                   </Text>
-                  <Text>분실자 닉네임님</Text>
+                  <Text>온천1동 1일전</Text>
                 </View>
               </View>
               <View style={styless.ModalBackBox}>
@@ -231,7 +254,7 @@ const ChatAlram = ({ navigation }) => {
                           marginBottom: 20,
                         }}
                       >
-                        충남대 이디아 앞 벤치
+                        궁동 라드카페
                       </Text>
                       <Text
                         style={{
@@ -248,8 +271,7 @@ const ChatAlram = ({ navigation }) => {
                           marginBottom: 20,
                         }}
                       >
-                        이디야카페에서 나와서 잠시 짐정리를 하다가 도서관을
-                        갔습니다.
+                        충남대학교에서 라드카페에서 과제를 하다가 집에 갔습니다
                       </Text>
                       <Text
                         style={{
@@ -283,6 +305,7 @@ const ChatAlram = ({ navigation }) => {
                 onPress={() => {
                   setIsShow2(false);
                   setAddQuiz(false);
+                  navigation.navigate("ChatRoom");
                 }}
               >
                 <Text

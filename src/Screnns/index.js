@@ -17,6 +17,10 @@ import ChatRoomSample from "./Chat/ChatRoomSample";
 import ChatAlram from "./Chat/ChatAlram";
 import ChatThanks from "./Chat/ChatThanks";
 
+//시나리오용
+import ListUpSin2 from "./Home/ListUpSin2";
+import ChatRoomSample2 from "./Chat/ChatRoomSample2";
+
 export {
   Home,
   ListUp,
@@ -34,4 +38,6 @@ export {
   Setting,
   ChatThanks,
   ChatRoomSample,
+  ListUpSin2,
+  ChatRoomSample2,
 };

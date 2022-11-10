@@ -25,6 +25,10 @@ const images = {
   sampleBox: require("./img/SampleBox.png"),
   thanksBottom: require("./img/thanksBottom.png"),
   thankheart: require("./img/thankheart.png"),
+  lostbag: require("./img/lostbag.jpeg"),
+  lostairpod: require("./img/lostairpod.jpeg"),
+  lostbuds: require("./img/lostbuds.jpeg"),
+  lostcard: require("./img/lostcard.jpeg"),
 };
 
 export default images;

@@ -16,13 +16,13 @@ import {
 import { MaterialIcons, Fontisto, AntDesign } from "@expo/vector-icons";
 import images from "../../../assets";
 
-const Card = ({ nav }) => {
+const Card = ({ nav, name, when }) => {
   return (
     <TouchableOpacity style={styles.CardBox} onPress={nav}>
       <Image source={images.profile} />
       <View style={{ justifyContent: "center", marginLeft: 10 }}>
-        <Text style={styles.CardTitle}>mlb 모자</Text>
-        <Text style={styles.CardSub}>어은동 1일전</Text>
+        <Text style={styles.CardTitle}>{name}</Text>
+        <Text style={styles.CardSub}>{when}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -74,13 +74,29 @@ const ChatList = ({ navigation }) => {
         }
         style={{ backgroundColor: "#F8F8FA" }}
       >
-        <Card nav={() => navigation.navigate("ChatRoom")} />
+        {/* 감사인사하기 */}
+        <Card
+          name={"온통대전 카드 주인?"}
+          when={"11월 12일 0일전"}
+          nav={() => navigation.navigate("ChatRoomSample2")}
+        />
+        {/* 감사인사 전 */}
+        <Card
+          name={"버즈 주인 찾아요"}
+          when={"11월 10일 2일전"}
+          nav={() => navigation.navigate("ChatRoomSample")}
+        />
 
-        <Card nav={() => navigation.navigate("ChatRoomSample")} />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {/* 거래성사 : 사용자가 습득자 채팅화면가기 */}
+        <Card
+          name={"검정 가방 주인 찾습니다."}
+          when={"11월 10일 2일전"}
+          nav={() => navigation.navigate("ChatRoom")}
+        />
+
+        <Card name={"더미데이터"} when={"00월 00일 0일전"} />
+        <Card name={"더미데이터"} when={"00월 00일 0일전"} />
+        <Card name={"더미데이터"} when={"00월 00일 0일전"} />
       </ScrollView>
     </>
   );

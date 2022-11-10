@@ -28,6 +28,8 @@ import {
   Matching,
   ChatThanks,
   ChatRoomSample,
+  ListUpSin2,
+  ChatRoomSample2,
 } from "../Screnns";
 import images from "../../assets/images";
 import { FloatingBtn } from "../Components";
@@ -83,58 +85,22 @@ const HomeStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        // options={({ navigation }) => ({
-        //   headerTitleAlign: "center",
-        // })}
-      />
-      <Stack.Screen
-        name="ListUp"
-        component={ListUp}
-        // options={{
-        //   headerTitleAlign: "center",
-        //   headerShown: true,
-        // }}
-      />
-      {/* <Stack.Screen
-        name="ChatAl"
-        component={ChatAlram}
-        options={{
-          headerTitleAlign: "center",
-          headerShown: true,
-        }}
-      /> */}
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="ListUp" component={ListUp} />
+      <Stack.Screen name="ListUpSin2" component={ListUpSin2} />
+
       <Stack.Screen
         name="Event"
         component={Event}
         options={({ navigation }) => ({
           headerTitleAlign: "center",
           headerShown: true,
-          // headerTransparent: true,
-          // headerRight: () => {
-          //   return (
-          //     <TouchableOpacity onPress={() => navigation.navigate("Modals")}>
-          //       <Image
-          //         source={require("../../assets/icon.png")}
-          //         style={styles.logo}
-          //       />
-          //     </TouchableOpacity>
-          //   );
-          // },
         })}
       />
 
       <Stack.Screen name="ProfileStack" component={ProfileStack} />
 
-      <Stack.Screen
-        name="Make"
-        component={MakeItem}
-        // options={({ navigation }) => ({
-        //   headerTitleAlign: "center",
-        // })}
-      />
+      <Stack.Screen name="Make" component={MakeItem} />
     </Stack.Navigator>
   );
 };
@@ -205,6 +171,7 @@ const ChatStack = () => {
     >
       <Stack.Screen name="ChatList" component={ChatList} />
       <Stack.Screen name="ChatRoomSample" component={ChatRoomSample} />
+      <Stack.Screen name="ChatRoomSample2" component={ChatRoomSample2} />
       <Stack.Screen name="ChatRoom" component={ChatRoom} />
       <Stack.Screen name="ChatThanks" component={ChatThanks} />
       <Stack.Screen name="ChatAll" component={ChatAlram} />

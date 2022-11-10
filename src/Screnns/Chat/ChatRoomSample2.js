@@ -27,7 +27,7 @@ import {
 import images from "../../../assets";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 
-const ChatRoomSample = ({ navigation }) => {
+const ChatRoomSample2 = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const ChatRoomSample = ({ navigation }) => {
     );
   };
   const [isShow, setIsShow] = useState(false);
-  const [isFin, setIsFIn] = useState(true);
+  const [isFin, setIsFIn] = useState(false);
   return (
     <View style={{ backgroundColor: "#F8F8FA", flex: 1 }}>
       <View style={styles.Header}>
@@ -94,7 +94,7 @@ const ChatRoomSample = ({ navigation }) => {
         >
           <AntDesign name="left" size={30} color="black" />
         </TouchableOpacity>
-        <Text style={styles.Title}>'나영나영'</Text>
+        <Text style={styles.Title}>'치킨먹고싶다'</Text>
         <View style={styles.CategoryBox}>
           <Fontisto name="bell" size={30} color="white" />
         </View>
@@ -113,7 +113,7 @@ const ChatRoomSample = ({ navigation }) => {
         }}
       >
         <View style={{ flexDirection: "row" }}>
-          <Image source={images.lostbuds} style={styles.cardImg} />
+          <Image source={images.lostcard} style={styles.cardImg} />
           <View
             style={{
               justifyContent: "center",
@@ -127,7 +127,7 @@ const ChatRoomSample = ({ navigation }) => {
                 marginBottom: 5,
               }}
             >
-              디지털기기
+              카드/신분증
             </Text>
             <Text
               style={{
@@ -229,7 +229,7 @@ const ChatRoomSample = ({ navigation }) => {
               }}
             >
               <Image source={images.profile} />
-              <Text>'나영나영'님께서</Text>
+              <Text>'치킨먹고싶다'님께서</Text>
               <Text style={{ fontSize: 18 }}>
                 아직 거래 완료를 하지 않으셨습니다.
               </Text>
@@ -329,4 +329,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChatRoomSample;
+export default ChatRoomSample2;

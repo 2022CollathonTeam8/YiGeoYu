@@ -60,12 +60,12 @@ const ChatThanks = ({ navigation }) => {
               </View>
               <View style={styles.ModalInBoxBottom}>
                 <View style={styles.ModalInBoxBottomLeft}>
-                  <Image source={images.sampleBox} />
+                  <Image source={images.lostbuds} style={styles.cardImg} />
                 </View>
                 <View style={styles.ModalInBoxBottomRight}>
-                  <Text style={{ fontSize: 15 }}>mlb 모자</Text>
+                  <Text style={{ fontSize: 15 }}>디지털기기</Text>
                   <Text style={{ color: "#878B93", fontSize: 13 }}>
-                    어은동 1일전
+                    온천1동 2일전
                   </Text>
                 </View>
               </View>
@@ -258,6 +258,12 @@ const styles = StyleSheet.create({
   ModalInBoxBottomLeft: {},
   ModalInBoxBottomRight: {
     marginLeft: 10,
+  },
+  cardImg: {
+    width: 58,
+    height: 58,
+    borderRadius: 5,
+    resizeMode: "contain",
   },
 });
 

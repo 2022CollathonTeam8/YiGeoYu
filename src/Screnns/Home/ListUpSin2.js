@@ -22,7 +22,7 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 
-const ListUp = ({ navigation }) => {
+const ListUpSin2 = ({ navigation }) => {
   // const [image, isImage] = useState(null);
   const [image, isImage] = useState("a");
 
@@ -39,7 +39,7 @@ const ListUp = ({ navigation }) => {
           <AntDesign name="close" size={30} color="black" />
         </TouchableOpacity>
         <Text ellipsizeMode="tail" numberOfLines={1} style={styles.Title}>
-          온통대전 카드 주인?
+          검정 가방 주인 찾습니다.
         </Text>
         <TouchableOpacity
           style={styles.CategoryBox}
@@ -62,7 +62,7 @@ const ListUp = ({ navigation }) => {
                 swipeToDismiss={false}
                 resizeMode="contain"
                 imageBackgroundColor="white"
-                source={images.lostcard}
+                source={images.lostbag}
                 style={styles.ImgBox}
               />
             ) : (
@@ -79,10 +79,10 @@ const ListUp = ({ navigation }) => {
               <Text
                 style={{ paddingBottom: 5, fontSize: 18, fontWeight: "bold" }}
               >
-                치킨먹고싶다
+                타몽
               </Text>
               <Text style={{ color: "#767676", fontSize: 15 }}>
-                온천1동 3일전
+                온천1동 1일전
               </Text>
             </View>
           </View>
@@ -301,4 +301,4 @@ const styles = StyleSheet.create({
   },
   ///////////////
 });
-export default ListUp;
+export default ListUpSin2;

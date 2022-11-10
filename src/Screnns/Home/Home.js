@@ -61,7 +61,7 @@ const Home = ({ navigation, route }) => {
   if (route.params == undefined) {
     Gu = "전체";
     Dong = "전체";
-    Category = { id: 0, type: "전체보기", img: images.all };
+    Category = { id: 0, type: "전체", img: images.all };
   } else {
     Gu = route.params.PassingData.gu;
     Dong = route.params.PassingData.dong;
@@ -133,7 +133,10 @@ const Home = ({ navigation, route }) => {
             />
           </View>
           <Banner />
-          <Image source={images.BottomCircle} style={styles.BottomCircle} />
+          <Image
+            source={images.HeaderBottomCircle}
+            style={styles.BottomCircle}
+          />
         </View>
 
         <View
@@ -149,18 +152,45 @@ const Home = ({ navigation, route }) => {
                 flexDirection: "row",
               }}
             >
-              <Image
-                source={Category.img}
-                alt=""
-                style={styles.SelectCategoryImg}
-              />
+              {Category.type == "전체" ? //   style={styles.SelectCategoryImg} //   alt="" //   source={Category.img} //   <Image
+              // />
+              null : (
+                <Image
+                  source={Category.img}
+                  alt=""
+                  style={styles.SelectCategoryImg}
+                />
+              )}
+
               <Text style={styles.SelectCategoryText}>이거유?</Text>
             </TouchableOpacity>
           </View>
           {/* 예시 */}
           <TouchableOpacity onPress={() => navigation.navigate("ListUp")}>
-            <LostCard />
+            <LostCard
+              name={"온통대전 카드 주인?"}
+              time={"11월 9일 18시"}
+              imagetype={images.lostcard}
+            />
           </TouchableOpacity>
+          <LostCard
+            name={"버즈 주인 찾아요"}
+            time={"11월 10일 22시"}
+            imagetype={images.lostbuds}
+          />
+          <LostCard
+            name={"에어팟 주인 없으면 제가 가집니다"}
+            time={"11월 11일 20시"}
+            imagetype={images.lostairpod}
+          />
+          <TouchableOpacity onPress={() => navigation.navigate("ListUpSin2")}>
+            <LostCard
+              name={"검정 가방 주인 찾습니다."}
+              time={"11월 10일 15시"}
+              imagetype={images.lostbag}
+            />
+          </TouchableOpacity>
+          {/* 가방 마지막 */}
         </View>
       </ScrollView>
     </>

@@ -3,19 +3,18 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 
 const sampleImg = "https://source.unsplash.com/1024x768/?nature";
 
-const LostCard = () => {
+const LostCard = ({ name, time, imagetype }) => {
   return (
     <View style={{ paddingHorizontal: 24 }}>
       <View style={styles.Container}>
         <View style={styles.ImgBox}>
-          <Image source={{ uri: sampleImg }} alt="" style={styles.Img} />
+          <Image source={imagetype} alt="" style={styles.Img} />
         </View>
         <View style={styles.ContentBox}>
           <Text ellipsizeMode="tail" numberOfLines={1} style={styles.Title}>
-            분실물 이름
+            {name}
           </Text>
-          <Text style={styles.When}>00월00일 00시</Text>
-          {/* <Text style={styles.Where}>유성구 궁동</Text> */}
+          <Text style={styles.When}>{time}</Text>
         </View>
       </View>
     </View>

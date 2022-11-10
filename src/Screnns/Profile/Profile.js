@@ -68,7 +68,7 @@ const Profile = ({ navigation }) => {
           >
             <View style={styles.ProfileTopImgBox}>
               <Image source={images.profile} alt="" />
-              <Text style={styles.ProfileTopText}>"이름"님</Text>
+              <Text style={styles.ProfileTopText}>"타몽"님</Text>
             </View>
             <Image source={images.heart} />
             <Text style={styles.ProfileHeartText1}>온정부피</Text>
@@ -83,7 +83,7 @@ const Profile = ({ navigation }) => {
               style={styles.ProfileTopStateBoxInner}
             >
               <Text style={styles.ProfileTopStateBoxInnerTitle}>습득물건</Text>
-              <Text style={styles.ProfileTopStateBoxInnerNum}>8</Text>
+              <Text style={styles.ProfileTopStateBoxInnerNum}>4</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

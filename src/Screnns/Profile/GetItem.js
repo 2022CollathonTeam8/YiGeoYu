@@ -64,10 +64,26 @@ const GetItem = ({ navigation }) => {
         }
         style={styles.MidArea}
       >
-        <LostCard />
-        <LostCard />
-        <LostCard />
-        <LostCard />
+        <LostCard
+          name={"온통대전 카드 주인?"}
+          time={"11월 9일 18시"}
+          imagetype={images.lostcard}
+        />
+        <LostCard
+          name={"버즈 주인 찾아요"}
+          time={"11월 10일 22시"}
+          imagetype={images.lostbuds}
+        />
+        <LostCard
+          name={"에어팟 주인 없으면 제가 가집니다"}
+          time={"11월 11일 20시"}
+          imagetype={images.lostairpod}
+        />
+        <LostCard
+          name={"검정 가방 주인 찾습니다."}
+          time={"11월 10일 15시"}
+          imagetype={images.lostbag}
+        />
       </ScrollView>
     </>
   );
