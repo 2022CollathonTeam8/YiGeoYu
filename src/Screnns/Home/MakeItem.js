@@ -43,6 +43,7 @@ const temp_day = temp_trash.getDate();
 
 const MakeItem = ({ navigation, route }) => {
   const [image, setImage] = useState(null);
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -109,10 +110,10 @@ const MakeItem = ({ navigation, route }) => {
     setIsShow(false);
   };
 
-  // const testfuntction = () => {
-  //   setIsShow(true).then({},pickImage);
-  // };
-
+  useEffect(() => {
+    setImage(null);
+    setGoDong(DaejeonDB[1].Array);
+  }, []);
   return (
     <>
       {/* //////HEADER////// */}

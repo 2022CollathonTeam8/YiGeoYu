@@ -28,7 +28,9 @@ import images from "../../../assets";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { LostCard } from "../../Components";
 import { CategoryData, Daejeon } from "../../DBTEMP";
-
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
 const ChatRoom = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
@@ -137,7 +139,7 @@ const ChatRoom = ({ navigation }) => {
                 color: "#878B93",
               }}
             >
-              11월 10일 2일전
+              온천1동 {temp_day - 11}일전
             </Text>
           </View>
         </View>

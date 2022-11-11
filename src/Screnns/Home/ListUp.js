@@ -21,7 +21,9 @@ import {
   FontAwesome5,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
 const ListUp = ({ navigation }) => {
   // const [image, isImage] = useState(null);
   const [image, isImage] = useState("a");
@@ -82,7 +84,7 @@ const ListUp = ({ navigation }) => {
                 치킨먹고싶다
               </Text>
               <Text style={{ color: "#767676", fontSize: 15 }}>
-                온천1동 3일전
+                온천1동 {temp_day - 9}일전
               </Text>
             </View>
           </View>

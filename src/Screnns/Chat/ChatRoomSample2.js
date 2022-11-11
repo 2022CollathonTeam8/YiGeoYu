@@ -26,7 +26,9 @@ import {
 } from "@expo/vector-icons";
 import images from "../../../assets";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
-
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
 const ChatRoomSample2 = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
@@ -135,7 +137,7 @@ const ChatRoomSample2 = ({ navigation }) => {
                 color: "#878B93",
               }}
             >
-              온천1동 2일전
+              온천1동 {temp_day - 9}일전
             </Text>
           </View>
         </View>

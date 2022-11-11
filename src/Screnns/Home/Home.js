@@ -52,6 +52,9 @@ const getLoc = () => {
   return location;
 };
 
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
 const Home = ({ navigation, route }) => {
   // let locdata = getLoc();
   //마이페이지 카테도리에서 정보 받아오기
@@ -152,9 +155,7 @@ const Home = ({ navigation, route }) => {
                 flexDirection: "row",
               }}
             >
-              {Category.type == "전체" ? //   style={styles.SelectCategoryImg} //   alt="" //   source={Category.img} //   <Image
-              // />
-              null : (
+              {Category.type == "전체" ? null : ( // /> //   style={styles.SelectCategoryImg} //   alt="" //   source={Category.img} //   <Image
                 <Image
                   source={Category.img}
                   alt=""
@@ -186,7 +187,7 @@ const Home = ({ navigation, route }) => {
           <TouchableOpacity onPress={() => navigation.navigate("ListUpSin2")}>
             <LostCard
               name={"검정 가방 주인 찾습니다."}
-              time={"11월 10일 15시"}
+              time={"11월 11일 15시"}
               imagetype={images.lostbag}
             />
           </TouchableOpacity>

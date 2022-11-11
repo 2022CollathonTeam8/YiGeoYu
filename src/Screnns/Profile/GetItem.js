@@ -81,7 +81,7 @@ const GetItem = ({ navigation }) => {
         />
         <LostCard
           name={"검정 가방 주인 찾습니다."}
-          time={"11월 10일 15시"}
+          time={"11월 11일 15시"}
           imagetype={images.lostbag}
         />
       </ScrollView>

@@ -22,6 +22,9 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
 const ListUpSin2 = ({ navigation }) => {
   // const [image, isImage] = useState(null);
   const [image, isImage] = useState("a");
@@ -82,7 +85,7 @@ const ListUpSin2 = ({ navigation }) => {
                 타몽
               </Text>
               <Text style={{ color: "#767676", fontSize: 15 }}>
-                온천1동 1일전
+                온천1동 {temp_day - 11}일전
               </Text>
             </View>
           </View>

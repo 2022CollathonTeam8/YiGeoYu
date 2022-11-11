@@ -27,6 +27,10 @@ import {
 import images from "../../../assets";
 import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
+
 const ChatRoomSample = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
 
@@ -135,7 +139,7 @@ const ChatRoomSample = ({ navigation }) => {
                 color: "#878B93",
               }}
             >
-              온천1동 2일전
+              온천1동 {temp_day - 10}일전
             </Text>
           </View>
         </View>

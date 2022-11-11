@@ -27,6 +27,10 @@ import images from "../../../assets";
 import { LostCard } from "../../Components";
 import { CategoryData, Daejeon } from "../../DBTEMP";
 
+const temp_trash = new Date();
+const temp_mon = temp_trash.getMonth() + 1;
+const temp_day = temp_trash.getDate();
+
 const Item = ({ type, img, isfous }) => {
   return (
     <View style={styles.ItemBox}>
@@ -48,7 +52,7 @@ const Card = ({ click }) => {
         <Image source={images.profile} />
         <View style={{ justifyContent: "center", marginLeft: 10 }}>
           <Text style={styles.CardTitle}>가방</Text>
-          <Text style={styles.CardSub}>온천1동 0일전</Text>
+          <Text style={styles.CardSub}>온천1동 {temp_day - 11}일전</Text>
         </View>
       </TouchableOpacity>
     </>
@@ -226,7 +230,7 @@ const ChatAlram = ({ navigation }) => {
                   <Text style={{ fontSize: 15, fontWeight: "700" }}>
                     타몽22
                   </Text>
-                  <Text>온천1동 1일전</Text>
+                  <Text>온천1동 {temp_day - 11}일전</Text>
                 </View>
               </View>
               <View style={styless.ModalBackBox}>
